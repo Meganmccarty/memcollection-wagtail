@@ -1,5 +1,7 @@
+ARG environment
+
 # Use an official Python runtime based on Debian 12 "bookworm" as a parent image.
-FROM python:3.12-slim-bookworm
+FROM python:3.12-slim-bookworm AS base
 
 # Add user that will be used in the container.
 RUN useradd wagtail
@@ -27,9 +29,22 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
 # Install the application server.
 RUN pip install "gunicorn==20.0.4"
 
+###############################################################################
+FROM base AS dev
+
+# Install the project requirements
+COPY requirements-dev.txt /
+RUN pip install -r /requirements-dev.txt
+
+###############################################################################
+FROM base AS prod
+
 # Install the project requirements.
 COPY requirements.txt /
 RUN pip install -r /requirements.txt
+
+###############################################################################
+FROM ${environment} AS final
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app
@@ -57,4 +72,5 @@ RUN python manage.py collectstatic --noinput --clear
 #   PRACTICE. The database should be migrated manually or using the release
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
-CMD set -xe; python manage.py migrate --noinput; gunicorn memcollection.wsgi:application
+# CMD set -xe; python manage.py migrate --noinput; gunicorn memcollection.wsgi:application
+CMD ["gunicorn", "--bind", ":8000", "--workers", "1", "memcollection.wsgi:application"]

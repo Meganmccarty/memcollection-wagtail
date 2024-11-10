@@ -5,10 +5,10 @@ help:
 
 # Docker commands
 build: ## Builds Docker containers for the Wagtail app and Postgres database
-	docker compose build
+	docker compose build --build-arg environment=dev
 
 build-no-cache: ## Builds Docker containers without caching
-	docker compose build --no-cache
+	docker compose build --no-cache --build-arg environment=dev
 
 up: ## Builds and runs Docker containers for the Wagtail app and database
 	docker compose up
@@ -21,10 +21,10 @@ prune: ## Prunes Docker system, containers, mages, and volumes
 
 # Docker commands for M chip Macs
 mac-build: ## Builds Docker containers for the Wagtail app and Postgres database for M chip Macs
-	docker compose -f docker-compose.yaml -f docker-compose.mac-m.yaml build
+	docker compose -f docker-compose.yaml -f docker-compose.mac-m.yaml build --build-arg environment=dev
 
 mac-build-no-cache: ## Builds Docker containers without caching for M chip Macs
-	docker compose -f docker-compose.yaml -f docker-compose.mac-m.yaml build --no-cache
+	docker compose -f docker-compose.yaml -f docker-compose.mac-m.yaml build --no-cache --build-arg environment=dev
 
 mac-up: ## Builds and runs Docker containers for the Wagtail app and database for M chip Macs
 	docker compose -f docker-compose.yaml -f docker-compose.mac-m.yaml up
@@ -41,3 +41,21 @@ createsuperuser: ## Creates a super user for the Wagtail app
 
 create-app: ## Creates new Django app (must set 'name=YOUR-APP-NAME')
 	docker compose run --rm web python manage.py startapp $(name)
+
+# Linting and formatting commands
+lint: ## Lints Python code using flake8
+	docker compose run --rm web python -m flake8 .
+
+format: ## Formats Python code using Black formatter
+	docker compose run --rm web python -m black .
+
+# Deploy commands
+fly-auth: ## Authenticate with Fly.io
+	fly auth login
+
+fly-secrets: ## Sets up Fly.io to use the env production secrets file
+	flyctl secrets import < .env.production
+
+fly-deploy: ## Deploy to Fly.io
+	make fly-secrets && \
+	fly deploy --build-arg=environment=prod --ha=false
