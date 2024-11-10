@@ -25,6 +25,9 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.getenv("SECRET_KEY")
+
 # Application definition
 
 INSTALLED_APPS = [

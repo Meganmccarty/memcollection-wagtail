@@ -9,8 +9,6 @@ DATABASES = {
     "default": dj_database_url.config(conn_max_age=600, conn_health_checks=True)
 }
 
-SECRET_KEY = os.environ["SECRET_KEY"]
-
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 SECURE_SSL_REDIRECT = True

@@ -58,4 +58,4 @@ fly-secrets: ## Sets up Fly.io to use the env production secrets file
 
 fly-deploy: ## Deploy to Fly.io
 	make fly-secrets && \
-	fly deploy --build-arg=environment=prod --ha=false
+	fly deploy --build-arg environment=prod --ha=false
