@@ -1,0 +1,9 @@
+services:
+  web:
+    platform: linux/arm64
+
+  db:
+    # There is no ARM/M1/M2/M3 image for postgis, to override M1/M2 macOS's
+    # request for this type of image and request the Intel/AMD/x86 image, which
+    # macOS will run (slowly) in emulation.
+    platform: linux/arm64
