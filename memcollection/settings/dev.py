@@ -1,4 +1,5 @@
-from .base import *
+import os
+from .base import *  # noqa: F403, F401
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -25,9 +26,3 @@ DATABASES = {
         "PORT": "5432",
     }
 }
-
-
-try:
-    from .local import *
-except ImportError:
-    pass
