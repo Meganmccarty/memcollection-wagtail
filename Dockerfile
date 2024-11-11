@@ -1,4 +1,5 @@
-ARG environment
+# Set this to either dev or prod to build the correct stage
+ARG ENVIRONMENT
 
 # Use an official Python runtime based on Debian 12 "bookworm" as a parent image.
 FROM python:3.12-slim-bookworm AS base
@@ -32,7 +33,7 @@ RUN pip install "gunicorn==20.0.4"
 ###############################################################################
 FROM base AS dev
 
-# Install the project requirements
+# Install the project requirements.
 COPY requirements-dev.txt /
 RUN pip install -r /requirements-dev.txt
 
@@ -44,7 +45,7 @@ COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
 ###############################################################################
-FROM ${environment} AS final
+FROM ${ENVIRONMENT} AS final
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app

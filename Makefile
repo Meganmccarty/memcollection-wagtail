@@ -5,10 +5,10 @@ help:
 
 # Docker commands
 build: ## Builds Docker containers for the Wagtail app and Postgres database
-	docker compose build --build-arg environment=dev
+	docker compose build
 
 build-no-cache: ## Builds Docker containers without caching
-	docker compose build --no-cache --build-arg environment=dev
+	docker compose build --no-cache
 
 up: ## Builds and runs Docker containers for the Wagtail app and database
 	docker compose up
@@ -21,10 +21,10 @@ prune: ## Prunes Docker system, containers, mages, and volumes
 
 # Docker commands for M chip Macs
 mac-build: ## Builds Docker containers for the Wagtail app and Postgres database for M chip Macs
-	docker compose -f docker-compose.yaml -f docker-compose.mac-m.yaml build --build-arg environment=dev
+	docker compose -f docker-compose.yaml -f docker-compose.mac-m.yaml build
 
 mac-build-no-cache: ## Builds Docker containers without caching for M chip Macs
-	docker compose -f docker-compose.yaml -f docker-compose.mac-m.yaml build --no-cache --build-arg environment=dev
+	docker compose -f docker-compose.yaml -f docker-compose.mac-m.yaml build --no-cache
 
 mac-up: ## Builds and runs Docker containers for the Wagtail app and database for M chip Macs
 	docker compose -f docker-compose.yaml -f docker-compose.mac-m.yaml up
@@ -50,12 +50,12 @@ format: ## Formats Python code using Black formatter
 	docker compose run --rm web python -m black .
 
 # Deploy commands
-fly-auth: ## Authenticate with Fly.io
+fly-auth: ## Authenticates to Fly.io
 	fly auth login
 
-fly-secrets: ## Sets up Fly.io to use the env production secrets file
+fly-secrets: ## Sets up Fly.io to use the .env.production secrets file
 	flyctl secrets import < .env.production
 
-fly-deploy: ## Deploy to Fly.io
+fly-deploy: ## Deploys to Fly.io
 	make fly-secrets && \
-	fly deploy --build-arg=environment=prod --ha=false
+	fly deploy --ha=false
