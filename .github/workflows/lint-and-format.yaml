@@ -23,6 +23,6 @@ jobs:
       - name: Install flake8 and Black
         run: pip --disable-pip-version-check install flake8 black
       - name: Lint with flake8
-        run: flake8 . --count --color --verbose
+        run: flake8 . --count
       - name: Lint with Black
         run: black . --check --color --diff
