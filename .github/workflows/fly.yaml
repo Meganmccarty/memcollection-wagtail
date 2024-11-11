@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - develop
 
 jobs:
   deploy:
@@ -11,8 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: deploy-group
     steps:
-      - uses: actions/checkout@v4
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --build-arg environment=prod --ha=false --remote-only
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Fly.io
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploy to Fly.io
+        run: flyctl deploy --ha=false --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
