@@ -1,0 +1,142 @@
+[
+    {
+        "model": "geography.locality",
+        "pk": 2,
+        "fields": {
+            "date_created": "2024-11-12T18:43:51.788Z",
+            "date_modified": "2024-11-14T01:19:03.779Z",
+            "country": null,
+            "state": null,
+            "county": 7,
+            "name": null,
+            "range": "4 km NW",
+            "town": "Patriot"
+        }
+    },
+    {
+        "model": "geography.locality",
+        "pk": 3,
+        "fields": {
+            "date_created": "2024-11-14T01:23:58.988Z",
+            "date_modified": "2024-11-14T01:23:58.988Z",
+            "country": null,
+            "state": null,
+            "county": 9,
+            "name": "Big Oaks NWR",
+            "range": null,
+            "town": "Madison"
+        }
+    },
+    {
+        "model": "geography.locality",
+        "pk": 4,
+        "fields": {
+            "date_created": "2024-11-14T01:26:52.928Z",
+            "date_modified": "2024-11-14T01:26:52.928Z",
+            "country": null,
+            "state": null,
+            "county": 3,
+            "name": "Bonanza Creek Experimental Forest",
+            "range": "23 km SW",
+            "town": "Ester"
+        }
+    },
+    {
+        "model": "geography.locality",
+        "pk": 5,
+        "fields": {
+            "date_created": "2024-11-14T01:29:46.408Z",
+            "date_modified": "2024-11-14T01:29:46.408Z",
+            "country": null,
+            "state": 21,
+            "county": null,
+            "name": null,
+            "range": null,
+            "town": "Montague"
+        }
+    },
+    {
+        "model": "geography.locality",
+        "pk": 8,
+        "fields": {
+            "date_created": "2024-11-14T16:18:19.892Z",
+            "date_modified": "2024-11-14T16:18:19.892Z",
+            "country": 2,
+            "state": null,
+            "county": null,
+            "name": null,
+            "range": null,
+            "town": "Mexico City"
+        }
+    },
+    {
+        "model": "geography.locality",
+        "pk": 9,
+        "fields": {
+            "date_created": "2024-11-14T16:19:06.607Z",
+            "date_modified": "2024-11-14T16:19:06.607Z",
+            "country": 1,
+            "state": null,
+            "county": null,
+            "name": "Carolina Biological Supply Company",
+            "range": null,
+            "town": null
+        }
+    },
+    {
+        "model": "geography.locality",
+        "pk": 10,
+        "fields": {
+            "date_created": "2024-11-14T16:23:13.985Z",
+            "date_modified": "2024-11-14T16:24:41.607Z",
+            "country": null,
+            "state": null,
+            "county": 10,
+            "name": "Fr 015, Uinta NF",
+            "range": null,
+            "town": "Payson"
+        }
+    },
+    {
+        "model": "geography.locality",
+        "pk": 11,
+        "fields": {
+            "date_created": "2024-11-14T16:25:21.047Z",
+            "date_modified": "2024-11-14T16:26:07.405Z",
+            "country": null,
+            "state": null,
+            "county": 11,
+            "name": null,
+            "range": null,
+            "town": "Sierra Vista"
+        }
+    },
+    {
+        "model": "geography.locality",
+        "pk": 12,
+        "fields": {
+            "date_created": "2024-11-15T01:57:47.058Z",
+            "date_modified": "2024-11-15T01:57:47.058Z",
+            "country": null,
+            "state": null,
+            "county": 7,
+            "name": "Boone Robinson Rd",
+            "range": "4 km NW",
+            "town": "Patriot"
+        }
+    },
+    {
+        "model": "geography.locality",
+        "pk": 13,
+        "fields": {
+            "date_created": "2024-11-15T02:06:29.460Z",
+            "date_modified": "2024-11-15T02:58:16.753Z",
+            "country": null,
+            "state": null,
+            "county": 12,
+            "name": "William's Lake Trail, Carson NF",
+            "range": null,
+            "town": "Taos Ski Valley"
+        }
+    }
+]

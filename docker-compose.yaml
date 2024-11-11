@@ -9,6 +9,9 @@ services:
       - ./:/app
     ports:
       - "8000:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}
+      SECRET_KEY: ${SECRET_KEY}
     depends_on:
       - db
 

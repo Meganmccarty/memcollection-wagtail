@@ -42,12 +42,24 @@ createsuperuser: ## Creates a super user for the Wagtail app
 create-app: ## Creates new Django app (must set 'name=YOUR-APP-NAME')
 	docker compose run --rm web python manage.py startapp $(name)
 
-# Linting and formatting commands
+dumpdata: ## Creates a JSON fixture from data in the database (must set 'model=app.Model' and 'output=app/fixtures/models.json')
+	docker compose run --rm web python manage.py dumpdata $(model) --output=$(output) --indent=4 --natural-foreign
+
+loaddata: ## Loads data from fixtures into the database (must set 'model=models.json')
+	docker compose run --rm web python manage.py loaddata $(model)
+
+# Linting, formatting, and testing commands
 lint: ## Lints Python code using flake8
 	docker compose run --rm web python -m flake8 .
 
 format: ## Formats Python code using Black formatter
 	docker compose run --rm web python -m black .
+
+test: ## Tests Python code
+	docker compose run --rm web coverage run manage.py test --verbosity=2 --pattern="test_*.py"
+
+coverage: ## Shows test coverage
+	docker compose run --rm web coverage report -m --omit=*/migrations/*,*/tests/*
 
 # Deploy commands
 fly-auth: ## Authenticates to Fly.io
