@@ -9,7 +9,7 @@ console_command = '/code/manage.py shell'
 
 [build]
    [build.args]
-      environment = 'prod'
+      ENVIRONMENT = 'prod'
 
 [deploy]
   release_command = 'python manage.py migrate --noinput'
