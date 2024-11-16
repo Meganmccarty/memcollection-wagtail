@@ -1,0 +1,32 @@
+name: Lint, Format, Test
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  lint-format-test:
+    name: Lint, format, and test Python files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4.1.0
+        with:
+          python-version: 3.12
+      - name: Install requirements
+        run: pip --disable-pip-version-check install -r requirements-dev.txt
+      - name: Lint with flake8
+        run: flake8 . --count
+      - name: Lint with Black
+        run: black . --check --color --diff
+      - name: Test Python code
+        run: coverage run manage.py test --settings=memcollection.settings.test --verbosity=2 --pattern="test_*.py"
+      - name: Show test coverage
+        run: coverage report -m --omit=*/migrations/*

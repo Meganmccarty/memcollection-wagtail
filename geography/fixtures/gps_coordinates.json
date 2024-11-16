@@ -1,0 +1,26 @@
+[
+    {
+        "model": "geography.gps",
+        "pk": 1,
+        "fields": {
+            "date_created": "2024-11-15T01:58:01.174Z",
+            "date_modified": "2024-11-15T02:10:02.291Z",
+            "locality": 12,
+            "latitude": "38.849500",
+            "longitude": "-84.866328",
+            "elevation": "252"
+        }
+    },
+    {
+        "model": "geography.gps",
+        "pk": 2,
+        "fields": {
+            "date_created": "2024-11-15T02:05:42.836Z",
+            "date_modified": "2024-11-15T02:10:05.175Z",
+            "locality": 13,
+            "latitude": null,
+            "longitude": null,
+            "elevation": "3157-3402"
+        }
+    }
+]

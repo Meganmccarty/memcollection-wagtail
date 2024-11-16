@@ -1,0 +1,32 @@
+[
+    {
+        "model": "geography.country",
+        "pk": 1,
+        "fields": {
+            "date_created": "2024-11-11T16:38:33.295Z",
+            "date_modified": "2024-11-11T16:38:33.295Z",
+            "name": "United States of America",
+            "abbr": "USA"
+        }
+    },
+    {
+        "model": "geography.country",
+        "pk": 2,
+        "fields": {
+            "date_created": "2024-11-11T23:58:48.707Z",
+            "date_modified": "2024-11-11T23:58:48.707Z",
+            "name": "Mexico",
+            "abbr": "MEX"
+        }
+    },
+    {
+        "model": "geography.country",
+        "pk": 3,
+        "fields": {
+            "date_created": "2024-11-11T23:58:56.579Z",
+            "date_modified": "2024-11-11T23:58:56.579Z",
+            "name": "Canada",
+            "abbr": "CAN"
+        }
+    }
+]
