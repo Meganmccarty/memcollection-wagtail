@@ -1,0 +1,321 @@
+[
+    {
+        "model": "geography.state",
+        "pk": 1,
+        "fields": {
+            "date_created": "2024-11-12T02:09:06.119Z",
+            "date_modified": "2024-11-12T02:09:06.119Z",
+            "country": 1,
+            "name": "Indiana",
+            "abbr": "IN"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 2,
+        "fields": {
+            "date_created": "2024-11-12T02:22:20.633Z",
+            "date_modified": "2024-11-12T02:22:20.633Z",
+            "country": 1,
+            "name": "Alaska",
+            "abbr": "AK"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 3,
+        "fields": {
+            "date_created": "2024-11-12T02:22:31.793Z",
+            "date_modified": "2024-11-12T02:22:31.793Z",
+            "country": 1,
+            "name": "Arizona",
+            "abbr": "AZ"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 4,
+        "fields": {
+            "date_created": "2024-11-12T02:22:46.019Z",
+            "date_modified": "2024-11-12T02:22:46.019Z",
+            "country": 1,
+            "name": "California",
+            "abbr": "CA"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 5,
+        "fields": {
+            "date_created": "2024-11-12T02:22:58.370Z",
+            "date_modified": "2024-11-12T02:22:58.370Z",
+            "country": 1,
+            "name": "Colorado",
+            "abbr": "CO"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 6,
+        "fields": {
+            "date_created": "2024-11-12T02:23:10.116Z",
+            "date_modified": "2024-11-12T02:23:10.116Z",
+            "country": 1,
+            "name": "Delaware",
+            "abbr": "DE"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 7,
+        "fields": {
+            "date_created": "2024-11-12T02:23:23.192Z",
+            "date_modified": "2024-11-12T02:23:23.192Z",
+            "country": 1,
+            "name": "Florida",
+            "abbr": "FL"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 8,
+        "fields": {
+            "date_created": "2024-11-12T02:23:35.609Z",
+            "date_modified": "2024-11-12T02:23:35.609Z",
+            "country": 1,
+            "name": "Iowa",
+            "abbr": "IA"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 9,
+        "fields": {
+            "date_created": "2024-11-12T02:23:46.330Z",
+            "date_modified": "2024-11-12T02:23:46.330Z",
+            "country": 1,
+            "name": "Kentucky",
+            "abbr": "KY"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 10,
+        "fields": {
+            "date_created": "2024-11-12T02:23:55.644Z",
+            "date_modified": "2024-11-12T02:23:55.644Z",
+            "country": 1,
+            "name": "Maryland",
+            "abbr": "MD"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 11,
+        "fields": {
+            "date_created": "2024-11-12T02:24:06.410Z",
+            "date_modified": "2024-11-12T02:24:06.410Z",
+            "country": 1,
+            "name": "Minnesota",
+            "abbr": "MN"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 12,
+        "fields": {
+            "date_created": "2024-11-12T02:24:17.848Z",
+            "date_modified": "2024-11-12T02:24:17.848Z",
+            "country": 1,
+            "name": "Mississippi",
+            "abbr": "MS"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 13,
+        "fields": {
+            "date_created": "2024-11-12T02:24:33.855Z",
+            "date_modified": "2024-11-12T02:24:33.855Z",
+            "country": 1,
+            "name": "Missouri",
+            "abbr": "MO"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 14,
+        "fields": {
+            "date_created": "2024-11-12T02:24:43.257Z",
+            "date_modified": "2024-11-12T02:24:43.257Z",
+            "country": 1,
+            "name": "Montana",
+            "abbr": "MT"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 15,
+        "fields": {
+            "date_created": "2024-11-12T02:24:54.889Z",
+            "date_modified": "2024-11-12T02:24:54.889Z",
+            "country": 1,
+            "name": "Nebraska",
+            "abbr": "NE"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 16,
+        "fields": {
+            "date_created": "2024-11-12T02:25:05.554Z",
+            "date_modified": "2024-11-12T02:25:05.554Z",
+            "country": 1,
+            "name": "Nevada",
+            "abbr": "NV"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 17,
+        "fields": {
+            "date_created": "2024-11-12T02:25:14.628Z",
+            "date_modified": "2024-11-12T02:25:14.628Z",
+            "country": 1,
+            "name": "New Mexico",
+            "abbr": "NM"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 18,
+        "fields": {
+            "date_created": "2024-11-12T02:25:25.140Z",
+            "date_modified": "2024-11-12T02:25:25.140Z",
+            "country": 1,
+            "name": "North Carolina",
+            "abbr": "NC"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 19,
+        "fields": {
+            "date_created": "2024-11-12T02:25:36.294Z",
+            "date_modified": "2024-11-12T02:25:36.294Z",
+            "country": 1,
+            "name": "Oklahoma",
+            "abbr": "OK"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 20,
+        "fields": {
+            "date_created": "2024-11-12T02:25:45.562Z",
+            "date_modified": "2024-11-12T02:25:45.562Z",
+            "country": 1,
+            "name": "Oregon",
+            "abbr": "OR"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 21,
+        "fields": {
+            "date_created": "2024-11-12T02:25:58.480Z",
+            "date_modified": "2024-11-12T02:25:58.480Z",
+            "country": 3,
+            "name": "Prince Edward Island",
+            "abbr": "PEI"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 22,
+        "fields": {
+            "date_created": "2024-11-12T02:26:09.465Z",
+            "date_modified": "2024-11-12T02:26:09.465Z",
+            "country": 1,
+            "name": "Tennessee",
+            "abbr": "TN"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 23,
+        "fields": {
+            "date_created": "2024-11-12T02:26:19.427Z",
+            "date_modified": "2024-11-12T02:26:19.427Z",
+            "country": 1,
+            "name": "Texas",
+            "abbr": "TX"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 24,
+        "fields": {
+            "date_created": "2024-11-12T02:26:28.373Z",
+            "date_modified": "2024-11-12T02:26:28.373Z",
+            "country": 1,
+            "name": "Utah",
+            "abbr": "UT"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 25,
+        "fields": {
+            "date_created": "2024-11-12T02:26:37.509Z",
+            "date_modified": "2024-11-12T02:26:37.509Z",
+            "country": 1,
+            "name": "Virginia",
+            "abbr": "VA"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 26,
+        "fields": {
+            "date_created": "2024-11-12T02:26:47.447Z",
+            "date_modified": "2024-11-12T02:26:47.447Z",
+            "country": 1,
+            "name": "Washington",
+            "abbr": "WA"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 27,
+        "fields": {
+            "date_created": "2024-11-12T02:26:58.289Z",
+            "date_modified": "2024-11-12T02:26:58.289Z",
+            "country": 1,
+            "name": "West Virginia",
+            "abbr": "WV"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 28,
+        "fields": {
+            "date_created": "2024-11-12T02:27:07.994Z",
+            "date_modified": "2024-11-12T02:27:07.994Z",
+            "country": 1,
+            "name": "Wyoming",
+            "abbr": "WY"
+        }
+    },
+    {
+        "model": "geography.state",
+        "pk": 29,
+        "fields": {
+            "date_created": "2024-11-12T03:04:56.277Z",
+            "date_modified": "2024-11-12T03:04:56.277Z",
+            "country": 1,
+            "name": "Louisiana",
+            "abbr": "LA"
+        }
+    }
+]

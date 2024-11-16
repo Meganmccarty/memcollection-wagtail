@@ -1,0 +1,122 @@
+[
+    {
+        "model": "geography.county",
+        "pk": 1,
+        "fields": {
+            "date_created": "2024-11-12T02:59:47.247Z",
+            "date_modified": "2024-11-12T02:59:47.247Z",
+            "state": 5,
+            "name": "Clear Creek"
+        }
+    },
+    {
+        "model": "geography.county",
+        "pk": 2,
+        "fields": {
+            "date_created": "2024-11-12T03:00:02.447Z",
+            "date_modified": "2024-11-12T03:00:02.447Z",
+            "state": 5,
+            "name": "Clear Creek/Summit"
+        }
+    },
+    {
+        "model": "geography.county",
+        "pk": 3,
+        "fields": {
+            "date_created": "2024-11-12T03:00:28.223Z",
+            "date_modified": "2024-11-12T03:00:28.223Z",
+            "state": 2,
+            "name": "Fairbanks N. Star"
+        }
+    },
+    {
+        "model": "geography.county",
+        "pk": 4,
+        "fields": {
+            "date_created": "2024-11-12T03:01:02.502Z",
+            "date_modified": "2024-11-12T03:01:02.502Z",
+            "state": 5,
+            "name": "Fremont"
+        }
+    },
+    {
+        "model": "geography.county",
+        "pk": 5,
+        "fields": {
+            "date_created": "2024-11-12T03:01:11.930Z",
+            "date_modified": "2024-11-12T03:01:11.930Z",
+            "state": 28,
+            "name": "Fremont"
+        }
+    },
+    {
+        "model": "geography.county",
+        "pk": 6,
+        "fields": {
+            "date_created": "2024-11-12T03:01:58.291Z",
+            "date_modified": "2024-11-12T03:01:58.291Z",
+            "state": 2,
+            "name": "Yukon-Koyukuk Census Area"
+        }
+    },
+    {
+        "model": "geography.county",
+        "pk": 7,
+        "fields": {
+            "date_created": "2024-11-12T03:02:06.011Z",
+            "date_modified": "2024-11-12T03:02:06.011Z",
+            "state": 1,
+            "name": "Switzerland"
+        }
+    },
+    {
+        "model": "geography.county",
+        "pk": 8,
+        "fields": {
+            "date_created": "2024-11-12T03:05:06.444Z",
+            "date_modified": "2024-11-12T03:05:06.444Z",
+            "state": 29,
+            "name": "Rapides"
+        }
+    },
+    {
+        "model": "geography.county",
+        "pk": 9,
+        "fields": {
+            "date_created": "2024-11-14T01:23:38.330Z",
+            "date_modified": "2024-11-14T01:23:38.330Z",
+            "state": 1,
+            "name": "Jefferson"
+        }
+    },
+    {
+        "model": "geography.county",
+        "pk": 10,
+        "fields": {
+            "date_created": "2024-11-14T16:24:28.701Z",
+            "date_modified": "2024-11-14T16:24:28.701Z",
+            "state": 24,
+            "name": "Utah"
+        }
+    },
+    {
+        "model": "geography.county",
+        "pk": 11,
+        "fields": {
+            "date_created": "2024-11-14T16:25:56.796Z",
+            "date_modified": "2024-11-14T16:25:56.796Z",
+            "state": 3,
+            "name": "Cochise"
+        }
+    },
+    {
+        "model": "geography.county",
+        "pk": 12,
+        "fields": {
+            "date_created": "2024-11-15T02:07:10.366Z",
+            "date_modified": "2024-11-15T02:07:10.366Z",
+            "state": 17,
+            "name": "Taos"
+        }
+    }
+]
