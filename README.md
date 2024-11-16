@@ -1,11 +1,11 @@
 # MEM Collection (Wagtail)
 
-MEM Collection is a (perpetual work-in-progress) project where I can manage my personal entomology collection and my personal photo collection of live specimens. This repo represents the backend API of the project and uses [headless Wagtail](https://wagtail.org/headless/) for managing the project's content. There are older versions of MEM Collection in different repos using different versions of plain [Django](https://www.djangoproject.com/); while I love Django, I have found working with and in Wagtail's admin interface to be an even more pleasant experience. It's easier for me to start fresh than try to update an older repo that wasn't well maintained.
+MEM Collection is a (perpetual work-in-progress) project where I manage my personal entomology collection and my personal photo collection of live specimens. This repo represents the backend API of the project and uses [headless Wagtail](https://wagtail.org/headless/) for managing the project's content. There are older versions of MEM Collection in different repos using different versions of plain [Django](https://www.djangoproject.com/); while I love Django, I have found working with and in Wagtail's admin interface to be an even more pleasant experience. It's easier for me to start fresh than try to update an older repo that wasn't well maintained.
 
-As I've said, this is a perpetual, work-in-progress project. :)
+As I've said, this is a perpetual, work-in-progress project. Hopefully, this is the last time I recreate this project from scratch...
 
 ## Getting Started
-This project will likely be something no one else will want to play with, but the steps to getting a local working copy up and running are below.
+This project will likely be something no one else will want to play with, but the steps to getting a local working copy up and running are below. (It's also good practice for me to thoroughly document my code, as I am very liable to forget stuff.)
 
 First, clone this repo from GitHub.
 
@@ -17,6 +17,7 @@ After creating the `.env` file, add the following variables to it:
     DATABASE_NAME=postgres
     DATABASE_PASSWORD=postgres
     DATABASE_USER=postgres
+    DJANGO_SETTINGS_MODULE=memcollection.settings.dev
     SECRET_KEY=Your Django Secret Key Here
 ```
 You can use a [secret key generator](https://djecrety.ir/) for the `SECRET_KEY` value.
@@ -93,13 +94,42 @@ To create a new Django app, you can run
 Be sure to add your newly created app to the `INSTALLED_APPS` list within `/memcollection/settings/base.py`.
 
 ### Linting
-I have set up [Flake8](https://flake8.pycqa.org/en/latest/) as the linter for this project. You can run `make lint` to lint the Python code.
+I have set up [Flake8](https://flake8.pycqa.org/en/latest/) as the linter for this project. You can run the following command to lint the Python code:
+```
+    make lint
+```
+This command will output any errors into the terminal, but will NOT automatically fix issues found. You can either fix them manually, or you can run the formatting command (listed below in the next section). I have noticed that long lines of strings (like code comments) often have to be fixed manually.
 
 ### Formatting
-For formatting, I chose to use [Black](https://black.readthedocs.io/en/stable/). You can format the Python code by running `make format`.
+For formatting, I chose to use [Black](https://black.readthedocs.io/en/stable/). You can format the Python code by running
+```
+    make format
+```
+This command WILL automatically format files, and it'll output in the terminal how many files are formatted or left unchanged.
+
+### Testing
+My aim is to have comprehensive test coverage for the various Django apps within the project. I'm using [unittest](https://docs.python.org/3/library/unittest.html) for, well, the unit tests, as it's built into the Python Standard Library (I've heard pytest is better, but I'm too lazy to try to figure out how to configure it in this project). Maybe someday, I'll write a few integration tests for the different models, but I feel that unit tests provide sufficient test coverage for this project.
+
+You can execute the tests by running
+```
+    make test
+```
+I set the verbosity to be a little higher (2, vs the default of 1), as I like seeing more details outputted in the terminal. This setting can be changed by altering the `test` command in the Makefile.
+
+I've also installed [Coverage](https://coverage.readthedocs.io/en/7.6.4/) in this project. You can see the overall test coverage by running
+```
+    make coverage
+```
+
+
+## CI/CD
+I have set up GitHub Actions to run the linting, formatting, and testing commands whenever code is pushed to the `develop` and `main` branches. These commands will also run whenever a pull request is opened for the `develop` and `main` branches. You can find the code that runs these commands under `.github/workflows/test.yaml`.
+
+The linting, formatting, and testing commands are slightly different in the CI/CD compared to the ones you run locally. With linting, the total number of issues found will be outputted in the terminal. With formatting, Black will just check for issues, not automatically fix them. Any issues found would need to be fixed, committed, and pushed, and GitHub Actions will rerun the commands. Lastly, the tests are run using SQLite as a database, rather than Postgres; I couldn't get Postgres working in GitHub Actions, so I kept it simple by using a different database configured in `memcollection/settings/test.py`.
+
 
 ## Deploying
-This project is deployed to [Fly.io](https://fly.io/). GitHub Actions is configured to deploy the project whenever changes are pushed to the main branch.
+This project is deployed to [Fly.io](https://fly.io/). GitHub Actions is configured to deploy the project whenever changes are pushed to the main branch. (You can see how the commands are configured under `.github/workflows/fly.yaml`.)
 
 However, there are still some little quirks I have yet to work out. For example, the only way to configure the prod environment variables is to do either one of the following:
 

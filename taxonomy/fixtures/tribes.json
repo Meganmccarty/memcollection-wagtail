@@ -1,0 +1,26 @@
+[
+{
+    "model": "taxonomy.tribe",
+    "pk": 1,
+    "fields": {
+        "date_created": "2024-11-17T02:50:05.119Z",
+        "date_modified": "2024-11-17T02:50:05.119Z",
+        "name": "Parnassiini",
+        "common_name": "Parnassians",
+        "authority": "Duponchel, 1835",
+        "subfamily": 1
+    }
+},
+{
+    "model": "taxonomy.tribe",
+    "pk": 2,
+    "fields": {
+        "date_created": "2024-11-17T18:42:29.528Z",
+        "date_modified": "2024-11-17T18:42:29.528Z",
+        "name": "Papilionini",
+        "common_name": "Swallowtails",
+        "authority": "Linnaeus, 1758",
+        "subfamily": 2
+    }
+}
+]

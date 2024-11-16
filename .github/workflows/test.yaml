@@ -29,4 +29,4 @@ jobs:
       - name: Test Python code
         run: coverage run manage.py test --settings=memcollection.settings.test --verbosity=2 --pattern="test_*.py"
       - name: Show test coverage
-        run: coverage report -m --omit=*/migrations/*
+        run: coverage report -m --omit=*/migrations/*,*/tests/*
