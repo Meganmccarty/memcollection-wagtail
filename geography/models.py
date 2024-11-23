@@ -1,28 +1,11 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.template.defaultfilters import slugify
-from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel
 from wagtail.fields import RichTextField
-from wagtail.snippets.models import register_snippet
+
+from mixins.models import TimeStampMixin
 
 
-class TimeStampMixin(models.Model):
-    """This is an abstract class for managing when a model instance is created and when it is
-    modified.
-
-    Attributes:
-        date_created (str): The date the model was created.
-        date_modified (str): The date the model was modified.
-    """
-
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_modified = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        abstract = True
-
-
-@register_snippet
 class Country(TimeStampMixin):
     """A model for a Country object. Inherits from the abstract TimeStampMixin class.
 
@@ -49,7 +32,6 @@ class Country(TimeStampMixin):
         return f"{self.name}"
 
 
-@register_snippet
 class State(TimeStampMixin):
     """A model for a State object. Inherits from the abstract TimeStampMixin class.
 
@@ -85,7 +67,6 @@ class State(TimeStampMixin):
         return f"{self.name}"
 
 
-@register_snippet
 class County(TimeStampMixin):
     """A model for a County object. Inherits from the abstract TimeStampMixin class.
 
@@ -188,7 +169,6 @@ class County(TimeStampMixin):
         return "{}{}{}".format(self.name, abbr, line)
 
 
-@register_snippet
 class Locality(TimeStampMixin):
     """A model for a Locality object. Inherits from the abstract TimeStampMixin class.
 
@@ -241,22 +221,6 @@ class Locality(TimeStampMixin):
         blank=True,
         help_text="Enter the nearest town, if known",
     )
-
-    panels = [
-        FieldPanel("name"),
-        FieldPanel("range"),
-        FieldPanel("town"),
-        MultiFieldPanel(
-            [
-                HelpPanel(
-                    heading="Note:", content="Choose a maximum of 1 option below)"
-                ),
-                FieldPanel("county"),
-                FieldPanel("state"),
-                FieldPanel("country"),
-            ]
-        ),
-    ]
 
     class Meta:
         ordering = ["name", "town"]
@@ -329,7 +293,6 @@ class Locality(TimeStampMixin):
         raise ValidationError(errors)
 
 
-@register_snippet
 class GPS(TimeStampMixin):
     """A model for a GPS object. Inherits from the abstract TimeStampMixin class.
 
@@ -403,7 +366,6 @@ class GPS(TimeStampMixin):
         return f"{self.elevation}m"
 
 
-@register_snippet
 class CollectingTrip(TimeStampMixin):
     """A model for a CollectingTrip object. Inherits from the abstract TimeStampMixin class.
 

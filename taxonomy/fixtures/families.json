@@ -1,0 +1,14 @@
+[
+    {
+        "model": "taxonomy.family",
+        "pk": 1,
+        "fields": {
+            "date_created": "2024-11-17T00:37:47.482Z",
+            "date_modified": "2024-11-17T00:37:47.482Z",
+            "name": "Papilionidae",
+            "common_name": "Swallowtails",
+            "authority": "Linnaeus, 1758",
+            "order": 1
+        }
+    }
+]

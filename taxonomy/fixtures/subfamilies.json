@@ -1,0 +1,26 @@
+[
+    {
+        "model": "taxonomy.subfamily",
+        "pk": 1,
+        "fields": {
+            "date_created": "2024-11-17T01:09:17.669Z",
+            "date_modified": "2024-11-17T02:49:36.152Z",
+            "name": "Parnassiinae",
+            "common_name": "Parnassians and Apollos",
+            "authority": "Duponchel, 1835",
+            "family": 1
+        }
+    },
+    {
+        "model": "taxonomy.subfamily",
+        "pk": 2,
+        "fields": {
+            "date_created": "2024-11-17T18:41:30.119Z",
+            "date_modified": "2024-11-17T18:41:48.891Z",
+            "name": "Papilioninae",
+            "common_name": "Swallowtails",
+            "authority": "Latreille, 1802",
+            "family": 1
+        }
+    }
+]
