@@ -48,6 +48,11 @@ dumpdata: ## Creates a JSON fixture from data in the database (must set 'model=a
 loaddata: ## Loads data from fixtures into the database (must set 'model=models.json')
 	docker compose run --rm web python manage.py loaddata $(model)
 
+load-fixtures: ## Loads all fixture data into the database
+	docker compose run --rm web python manage.py loaddata countries.json states.json counties.json localities.json \
+		gps_coordinates.json collecting_trips.json orders.json families.json subfamilies.json tribes.json genera.json \
+		species.json subspecies.json
+
 # Linting, formatting, and testing commands
 lint: ## Lints Python code using flake8
 	docker compose run --rm web python -m flake8 .
