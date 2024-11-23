@@ -1,30 +1,30 @@
 [
-{
-    "model": "taxonomy.species",
-    "pk": 2,
-    "fields": {
-        "date_created": "2024-11-17T18:50:47.233Z",
-        "date_modified": "2024-11-17T18:50:47.233Z",
-        "name": "smintheus",
-        "common_name": "Rocky Mountain Parnassian",
-        "authority": "Doubleday, [1847]",
-        "genus": 1,
-        "mona": "4155.2",
-        "p3": "770291"
+    {
+        "model": "taxonomy.species",
+        "pk": 2,
+        "fields": {
+            "date_created": "2024-11-17T18:50:47.233Z",
+            "date_modified": "2024-11-23T22:18:56.385Z",
+            "name": "smintheus",
+            "common_name": "Rocky Mountain Parnassian",
+            "authority": "Doubleday, [1847]",
+            "genus": 1,
+            "mona": "4155.2",
+            "p3": "770291"
+        }
+    },
+    {
+        "model": "taxonomy.species",
+        "pk": 3,
+        "fields": {
+            "date_created": "2024-11-17T18:51:41.837Z",
+            "date_modified": "2024-11-23T22:18:49.994Z",
+            "name": "polyxenes",
+            "common_name": "Black Swallowtail",
+            "authority": "Fabricius, 1775",
+            "genus": 2,
+            "mona": "4159",
+            "p3": "770301"
+        }
     }
-},
-{
-    "model": "taxonomy.species",
-    "pk": 3,
-    "fields": {
-        "date_created": "2024-11-17T18:51:41.837Z",
-        "date_modified": "2024-11-17T18:51:41.837Z",
-        "name": "polyxenes",
-        "common_name": "Black Swallowtail",
-        "authority": "Fabricius, 1775",
-        "genus": 2,
-        "mona": "4159",
-        "p3": "770301"
-    }
-}
 ]

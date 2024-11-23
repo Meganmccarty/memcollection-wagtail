@@ -1,13 +1,13 @@
 [
-{
-    "model": "taxonomy.order",
-    "pk": 1,
-    "fields": {
-        "date_created": "2024-11-17T00:37:27.071Z",
-        "date_modified": "2024-11-17T00:37:27.071Z",
-        "name": "Lepidoptera",
-        "common_name": "Butterflies and Moths",
-        "authority": "Linnaeus, 1758"
+    {
+        "model": "taxonomy.order",
+        "pk": 1,
+        "fields": {
+            "date_created": "2024-11-17T00:37:27.071Z",
+            "date_modified": "2024-11-17T00:37:27.071Z",
+            "name": "Lepidoptera",
+            "common_name": "Butterflies and Moths",
+            "authority": "Linnaeus, 1758"
+        }
     }
-}
 ]

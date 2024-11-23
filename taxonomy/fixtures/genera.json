@@ -1,26 +1,26 @@
 [
-{
-    "model": "taxonomy.genus",
-    "pk": 1,
-    "fields": {
-        "date_created": "2024-11-17T15:39:09.086Z",
-        "date_modified": "2024-11-17T15:39:09.086Z",
-        "name": "Parnassius",
-        "common_name": "Parnassians",
-        "authority": "Latreille, 1804",
-        "tribe": 1
+    {
+        "model": "taxonomy.genus",
+        "pk": 1,
+        "fields": {
+            "date_created": "2024-11-17T15:39:09.086Z",
+            "date_modified": "2024-11-17T15:39:09.086Z",
+            "name": "Parnassius",
+            "common_name": "Parnassians",
+            "authority": "Latreille, 1804",
+            "tribe": 1
+        }
+    },
+    {
+        "model": "taxonomy.genus",
+        "pk": 2,
+        "fields": {
+            "date_created": "2024-11-17T18:43:10.815Z",
+            "date_modified": "2024-11-17T18:43:10.815Z",
+            "name": "Papilio",
+            "common_name": "Swallowtails",
+            "authority": "Linnaeus, 1758",
+            "tribe": 2
+        }
     }
-},
-{
-    "model": "taxonomy.genus",
-    "pk": 2,
-    "fields": {
-        "date_created": "2024-11-17T18:43:10.815Z",
-        "date_modified": "2024-11-17T18:43:10.815Z",
-        "name": "Papilio",
-        "common_name": "Swallowtails",
-        "authority": "Linnaeus, 1758",
-        "tribe": 2
-    }
-}
 ]
