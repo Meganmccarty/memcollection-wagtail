@@ -1,0 +1,16 @@
+[
+    {
+        "model": "taxonomy.subspecies",
+        "pk": 1,
+        "fields": {
+            "date_created": "2024-11-23T22:18:38.449Z",
+            "date_modified": "2024-11-23T22:18:38.449Z",
+            "name": "coloro",
+            "common_name": "Desert Black Swallowtail",
+            "authority": "(Wright, 1905)",
+            "species": 3,
+            "mona": "4159",
+            "p3": "770301"
+        }
+    }
+]

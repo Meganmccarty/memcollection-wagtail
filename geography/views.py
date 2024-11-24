@@ -9,6 +9,7 @@ from geography.serializers import (
     LocalitySerializer,
     StateSerializer,
 )
+from utils.helpers import get_fields
 
 
 class CountriesAPIViewSet(BaseAPIViewSet):
@@ -16,6 +17,9 @@ class CountriesAPIViewSet(BaseAPIViewSet):
 
     base_serializer_class = CountrySerializer
     model = Country
+    queryset = Country.objects.all()
+    body_fields = get_fields(CountrySerializer)
+    listing_default_fields = get_fields(CountrySerializer)
 
 
 class StatesAPIViewSet(BaseAPIViewSet):
@@ -23,6 +27,9 @@ class StatesAPIViewSet(BaseAPIViewSet):
 
     base_serializer_class = StateSerializer
     model = State
+    queryset = State.objects.select_related("country").all()
+    body_fields = get_fields(StateSerializer)
+    listing_default_fields = get_fields(StateSerializer)
 
 
 class CountiesAPIViewSet(BaseAPIViewSet):
@@ -30,6 +37,9 @@ class CountiesAPIViewSet(BaseAPIViewSet):
 
     base_serializer_class = CountySerializer
     model = County
+    queryset = County.objects.select_related("state").select_related("country").all()
+    body_fields = get_fields(CountySerializer)
+    listing_default_fields = get_fields(CountySerializer)
 
 
 class LocalitiesAPIViewSet(BaseAPIViewSet):
@@ -37,6 +47,14 @@ class LocalitiesAPIViewSet(BaseAPIViewSet):
 
     base_serializer_class = LocalitySerializer
     model = Locality
+    queryset = (
+        Locality.objects.select_related("county")
+        .select_related("state")
+        .select_related("country")
+        .all()
+    )
+    body_fields = get_fields(LocalitySerializer)
+    listing_default_fields = get_fields(LocalitySerializer)
 
 
 class GPSAPIViewSet(BaseAPIViewSet):
@@ -44,6 +62,15 @@ class GPSAPIViewSet(BaseAPIViewSet):
 
     base_serializer_class = GPSSerializer
     model = GPS
+    queryset = (
+        GPS.objects.select_related("locality")
+        .select_related("county")
+        .select_related("state")
+        .select_related("country")
+        .all()
+    )
+    body_fields = get_fields(GPSSerializer)
+    listing_default_fields = get_fields(GPSSerializer)
 
 
 class CollectingTripsAPIViewSet(BaseAPIViewSet):
@@ -51,3 +78,6 @@ class CollectingTripsAPIViewSet(BaseAPIViewSet):
 
     base_serializer_class = CollectingTripSerializer
     model = CollectingTrip
+    queryset = CollectingTrip.objects.prefetch_related("states").all()
+    body_fields = get_fields(CollectingTripSerializer)
+    listing_default_fields = get_fields(CollectingTripSerializer)

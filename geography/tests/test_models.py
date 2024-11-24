@@ -263,8 +263,8 @@ class GPSTestCase(TestCase):
 
         GPS.objects.create(
             locality=Locality.objects.get(name="Boone Robinson Rd"),
-            latitude=38.849500,
-            longitude=-84.866328,
+            latitude="38.849500",
+            longitude="-84.866328",
             elevation="252",
         )
         GPS.objects.create(
@@ -275,7 +275,7 @@ class GPSTestCase(TestCase):
     def test_name(self):
         """Ensures the __str__() method returns the correct info for a given GPS object instance."""
 
-        gps_coordinates = GPS.objects.get(latitude=38.849500)
+        gps_coordinates = GPS.objects.get(latitude="38.849500")
         no_gps_coordinates = GPS.objects.get(elevation="3157-3402")
 
         self.assertEqual(
