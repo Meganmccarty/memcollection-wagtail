@@ -301,8 +301,8 @@ class GPS(TimeStampMixin):
 
     Attributes:
         locality (obj): The locality to which the GPS object instance belongs.
-        latitude (float): The latitude part of the GPS coordinates.
-        longidute (float): The longitude part of the GPS coordinates.
+        latitude (str): The latitude part of the GPS coordinates.
+        longidute (str): The longitude part of the GPS coordinates.
         elevation (str): The elevation of the GPS coordinates. It is a string rather than an integer
         because there are some cases where a range of elevations are provided.
     """
@@ -313,16 +313,12 @@ class GPS(TimeStampMixin):
         related_name="+",
         help_text="Select the locality for this set of coordinates",
     )
-    latitude = models.DecimalField(
-        max_digits=8,
-        decimal_places=6,
+    latitude = models.CharField(
         null=True,
         blank=True,
         help_text="Enter the latitude in decimal degrees",
     )
-    longitude = models.DecimalField(
-        max_digits=9,
-        decimal_places=6,
+    longitude = models.CharField(
         null=True,
         blank=True,
         help_text="Enter the longitude in decimal degrees",

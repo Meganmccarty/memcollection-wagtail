@@ -10,17 +10,7 @@ from taxonomy.serializers import (
     SubspeciesSerializer,
     TribeSerializer,
 )
-
-
-def get_fields(serializer):
-    """Obtains a serializer's fields and returns them as a list."""
-
-    fields = []
-
-    for key in serializer().fields:
-        fields.append(key)
-
-    return fields
+from utils.helpers import get_fields
 
 
 class OrdersAPIViewSet(BaseAPIViewSet):
