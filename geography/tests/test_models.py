@@ -7,10 +7,7 @@ from geography.models import CollectingTrip, County, Country, GPS, Locality, Sta
 class CountryTestCase(TestCase):
     """A test case for the Country model."""
 
-    def setUp(self):
-        """Sets up the data needed for testing the Country model."""
-
-        Country.objects.create(name="United States of America", abbr="USA")
+    fixtures = ["countries.json"]
 
     def test_name(self):
         """Ensures the __str__() method returns the country's name."""
@@ -22,14 +19,7 @@ class CountryTestCase(TestCase):
 class StateTestCase(TestCase):
     """A test case for the State model."""
 
-    fixtures = ["countries.json"]
-
-    def setUp(self):
-        """Sets up the data needed for testing the State model."""
-
-        State.objects.create(
-            name="Indiana", abbr="IN", country=Country.objects.get(abbr="USA")
-        )
+    fixtures = ["countries.json", "states.json"]
 
     def test_name(self):
         """Ensures the __str__() method returns the state's name."""
@@ -41,24 +31,7 @@ class StateTestCase(TestCase):
 class CountyTestCase(TestCase):
     """A test case for the County model."""
 
-    fixtures = ["countries.json", "states.json"]
-
-    def setUp(self):
-        """Sets up the data needed for testing the County model."""
-
-        County.objects.create(
-            name="Switzerland", state=State.objects.get(name="Indiana")
-        )
-        County.objects.create(name="Rapides", state=State.objects.get(name="Louisiana"))
-        County.objects.create(
-            name="Fairbanks N. Star", state=State.objects.get(name="Alaska")
-        )
-        County.objects.create(
-            name="Yukon-Koyukuk Census Area", state=State.objects.get(name="Alaska")
-        )
-        County.objects.create(
-            name="Clear Creek/Summit", state=State.objects.get(name="Colorado")
-        )
+    fixtures = ["countries.json", "states.json", "counties.json"]
 
     def test_name(self):
         """Ensures the __str__() method returns the county's name, abbr, and state abbr.
@@ -121,37 +94,7 @@ class CountyTestCase(TestCase):
 class LocalityTestCase(TestCase):
     """A test case for the Locality model."""
 
-    fixtures = ["countries.json", "states.json", "counties.json"]
-
-    def setUp(self):
-        """Sets up the data needed for testing the Locality model."""
-
-        Locality.objects.create(
-            name="Bonanza Creek Experimental Forest",
-            range="23 km SW",
-            town="Ester",
-            county=County.objects.get(name="Fairbanks N. Star"),
-        )
-        Locality.objects.create(
-            range="4 km NW",
-            town="Patriot",
-            county=County.objects.get(name="Switzerland"),
-        )
-        Locality.objects.create(
-            name="Big Oaks NWR",
-            town="Madison",
-            county=County.objects.get(name="Jefferson"),
-        )
-        Locality.objects.create(
-            town="Montague", state=State.objects.get(name="Prince Edward Island")
-        )
-        Locality.objects.create(
-            name="Carolina Biological Supply Company",
-            country=Country.objects.get(name="United States of America"),
-        )
-        Locality.objects.create(
-            town="Mexico City", country=Country.objects.get(name="Mexico")
-        )
+    fixtures = ["countries.json", "states.json", "counties.json", "localities.json"]
 
     def test_name(self):
         """Ensures the __str__() method returns the correct info for a given locality."""
@@ -159,7 +102,9 @@ class LocalityTestCase(TestCase):
         locality_county_all = Locality.objects.get(
             name="Bonanza Creek Experimental Forest"
         )
-        locality_county_no_name = Locality.objects.get(range="4 km NW", town="Patriot")
+        locality_county_no_name = Locality.objects.get(
+            range="4 km NW", town="Patriot", name=None
+        )
         locality_county_no_range = Locality.objects.get(
             name="Big Oaks NWR", town="Madison"
         )
@@ -256,21 +201,13 @@ class LocalityTestCase(TestCase):
 class GPSTestCase(TestCase):
     """A test case for the GPS model."""
 
-    fixtures = ["countries.json", "states.json", "counties.json", "localities.json"]
-
-    def setUp(self):
-        """Sets up the data needed for testing the GPS model."""
-
-        GPS.objects.create(
-            locality=Locality.objects.get(name="Boone Robinson Rd"),
-            latitude="38.849500",
-            longitude="-84.866328",
-            elevation="252",
-        )
-        GPS.objects.create(
-            locality=Locality.objects.get(name="William's Lake Trail, Carson NF"),
-            elevation="3157-3402",
-        )
+    fixtures = [
+        "countries.json",
+        "states.json",
+        "counties.json",
+        "localities.json",
+        "gps_coordinates.json",
+    ]
 
     def test_name(self):
         """Ensures the __str__() method returns the correct info for a given GPS object instance."""
@@ -291,24 +228,13 @@ class GPSTestCase(TestCase):
         """Ensures an "m" is appended to the elevation."""
 
         no_gps_coordinates = GPS.objects.get(elevation="3157-3402")
-
         self.assertEqual(no_gps_coordinates.elevation_meters, "3157-3402m")
 
 
 class CollectingTripTestCase(TestCase):
     """A test case for the CollectingTrip model."""
 
-    fixtures = ["countries.json", "states.json"]
-
-    def setUp(self):
-        """Sets up the data needed for testing the CollectingTrip model."""
-
-        trip = CollectingTrip.objects.create(
-            name="LepSoc 2008", start_date="2008-06-24", end_date="2008-06-28"
-        )
-        ms = State.objects.get(name="Mississippi")
-        tn = State.objects.get(name="Tennessee")
-        trip.states.add(ms.id, tn.id)
+    fixtures = ["countries.json", "states.json", "collecting_trips.json"]
 
     def test_name(self):
         """Ensures the __str__() method returns the correct info for a CollectingTrip."""
@@ -318,5 +244,6 @@ class CollectingTripTestCase(TestCase):
 
     def test_slug(self):
         """Ensures the slug() method returns properly slugifies a CollectingTrip's name."""
+
         trip = CollectingTrip.objects.get(name="LepSoc 2008")
         self.assertEqual(trip.slug, "lepsoc-2008")

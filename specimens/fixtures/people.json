@@ -1,0 +1,50 @@
+[
+    {
+        "model": "specimens.person",
+        "pk": 1,
+        "fields": {
+            "date_created": "2024-11-24T18:31:41.519Z",
+            "date_modified": "2024-11-24T18:31:41.519Z",
+            "first_name": "Megan",
+            "middle_initial": "E",
+            "last_name": "McCarty",
+            "suffix": null
+        }
+    },
+    {
+        "model": "specimens.person",
+        "pk": 3,
+        "fields": {
+            "date_created": "2024-11-24T18:32:01.807Z",
+            "date_modified": "2024-11-24T18:59:29.108Z",
+            "first_name": "Paul",
+            "middle_initial": "A",
+            "last_name": "Smith",
+            "suffix": "Jr."
+        }
+    },
+    {
+        "model": "specimens.person",
+        "pk": 4,
+        "fields": {
+            "date_created": "2024-11-24T18:59:14.498Z",
+            "date_modified": "2024-11-24T18:59:14.498Z",
+            "first_name": "Jane",
+            "middle_initial": null,
+            "last_name": "Doe",
+            "suffix": null
+        }
+    },
+    {
+        "model": "specimens.person",
+        "pk": 5,
+        "fields": {
+            "date_created": "2024-11-24T19:02:45.170Z",
+            "date_modified": "2024-11-24T19:02:45.170Z",
+            "first_name": "Thomas",
+            "middle_initial": null,
+            "last_name": "Williams",
+            "suffix": "III"
+        }
+    }
+]
