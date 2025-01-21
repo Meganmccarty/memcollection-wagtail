@@ -36,7 +36,7 @@ class State(TimeStampMixin):
     """A model for a State object. Inherits from the abstract TimeStampMixin class.
 
     Attributes:
-        country (obj): The country to which the state belongs.
+        country (Country): The country to which the state belongs.
         name (str): The full name of the state.
         abbr (str): The state's abbreviation (should be 2 letters).
     """
@@ -71,7 +71,7 @@ class County(TimeStampMixin):
     """A model for a County object. Inherits from the abstract TimeStampMixin class.
 
     Attributes:
-        state (obj): The state to which the county belongs.
+        state (State): The state to which the county belongs.
         name (str): The full name of the county.
     """
 
@@ -92,8 +92,8 @@ class County(TimeStampMixin):
     def __str__(self):
         """This method returns a string representation of an instance of the County object.
 
-        It uses both a property of the County object (full_name) as well as state abbreviation to
-        which this County object instance belongs (state.abbr). For example, if the county is
+        It uses both a property of the County object (full_name) as well as the state abbreviation
+        to which this County object instance belongs (state.abbr). For example, if the county is
         Switzerland and the state is Indiana, __str__() will return "Switzerland Co., IN".
 
         Returns:
@@ -185,11 +185,11 @@ class Locality(TimeStampMixin):
     available.
 
     Attributes:
-        country (obj): The country to which the locality belongs.
-        state (obj): The state to which the locality belongs.
-        county (obj): The county to which the locality belongs.
+        country (Country): The country to which the locality belongs.
+        state (State): The state to which the locality belongs.
+        county (County): The county to which the locality belongs.
         name (str): The name of the locality.
-        range (str): The direction and distance of the locality from the nearest town.
+        range (str): The distance and direction of the locality from the nearest town.
         town (str): The nearest town to the locality.
     """
 
@@ -300,9 +300,12 @@ class GPS(TimeStampMixin):
     range of elevations are known, but GPS coordinates were not taken.
 
     Attributes:
-        locality (obj): The locality to which the GPS object instance belongs.
-        latitude (str): The latitude part of the GPS coordinates.
-        longidute (str): The longitude part of the GPS coordinates.
+        locality (Locality): The locality to which the GPS object instance belongs.
+        latitude (str): The latitude part of the GPS coordinates. It is a string rather than a float
+        so that I have control on the exact number of decimal points when the field is serialized.
+        longidute (str): The longitude part of the GPS coordinates. It is a string rather than a
+        float so that I have control on the exact number of decimal points when the field is
+        serialized.
         elevation (str): The elevation of the GPS coordinates. It is a string rather than an integer
         because there are some cases where a range of elevations are provided.
     """
@@ -367,7 +370,7 @@ class CollectingTrip(TimeStampMixin):
 
     Attributes:
         name (str): The name of the collecting trip.
-        states (obj[]): A list of State object instances to which the collecting trip belongs.
+        states (State[]): A list of State object instances to which the collecting trip belongs.
         start_date (date): The start date of the trip.
         end_date (date): The end date of the trip.
         notes (str): A rich text field for documenting trip notes.

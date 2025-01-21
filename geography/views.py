@@ -7,6 +7,10 @@ from geography.serializers import (
     CountrySerializer,
     GPSSerializer,
     LocalitySerializer,
+    NestedCountySerializer,
+    NestedGPSSerializer,
+    NestedLocalitySerializer,
+    NestedStateSerializer,
     StateSerializer,
 )
 from utils.helpers import get_fields
@@ -81,3 +85,54 @@ class CollectingTripsAPIViewSet(BaseAPIViewSet):
     queryset = CollectingTrip.objects.prefetch_related("states").all()
     body_fields = get_fields(CollectingTripSerializer)
     listing_default_fields = get_fields(CollectingTripSerializer)
+
+
+class NestedStatesAPIViewSet(BaseAPIViewSet):
+    """A custom API view set for the State model using the NestedStateSerializer."""
+
+    base_serializer_class = NestedStateSerializer
+    model = State
+    queryset = State.objects.select_related("country").all()
+    body_fields = get_fields(NestedStateSerializer)
+    listing_default_fields = get_fields(NestedStateSerializer)
+
+
+class NestedCountiesAPIViewSet(BaseAPIViewSet):
+    """A custom API view set for the County model using the NestedCountySerializer."""
+
+    base_serializer_class = NestedCountySerializer
+    model = County
+    queryset = County.objects.select_related("state").select_related("country").all()
+    body_fields = get_fields(NestedCountySerializer)
+    listing_default_fields = get_fields(NestedCountySerializer)
+
+
+class NestedLocalitiesAPIViewSet(BaseAPIViewSet):
+    """A custom API view set for the Locality model using the NestedLocalitySerializer."""
+
+    base_serializer_class = NestedLocalitySerializer
+    model = Locality
+    queryset = (
+        Locality.objects.select_related("county")
+        .select_related("state")
+        .select_related("country")
+        .all()
+    )
+    body_fields = get_fields(NestedLocalitySerializer)
+    listing_default_fields = get_fields(NestedLocalitySerializer)
+
+
+class NestedGPSAPIViewSet(BaseAPIViewSet):
+    """A custom API view set for the GPS model using the NestedGPSSerializer."""
+
+    base_serializer_class = NestedGPSSerializer
+    model = GPS
+    queryset = (
+        GPS.objects.select_related("locality")
+        .select_related("county")
+        .select_related("state")
+        .select_related("country")
+        .all()
+    )
+    body_fields = get_fields(NestedGPSSerializer)
+    listing_default_fields = get_fields(NestedGPSSerializer)

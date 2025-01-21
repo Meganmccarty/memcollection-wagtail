@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "geography",
     "home",
     "search",
+    "specimens",
     "taxonomy",
     "wagtail.api.v2",
     "wagtail.contrib.forms",

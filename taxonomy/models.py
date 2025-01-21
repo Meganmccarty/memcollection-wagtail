@@ -118,6 +118,8 @@ class Species(TimeStampMixin, TaxonomyBase):
         genus (Genus): The genus to which the species belongs.
         mona (str): The MONA (Hodges) number for the species (Lepidoptera only).
         p3 (str): The P3 (Pohl, Patterson, Pelham 2016) number for the species (Lepidoptera only).
+        ps (str): The Phylogenetic Sequence (Pohl and Nanz, 2023) number for the species
+        (Lepidoptera only).
     """
 
     genus = models.ForeignKey(
@@ -129,13 +131,22 @@ class Species(TimeStampMixin, TaxonomyBase):
     mona = models.CharField(
         null=True,
         blank=True,
+        verbose_name="MONA #",
         help_text="Enter the MONA (Hodges) number for the species (Lepidoptera only)",
     )
     p3 = models.CharField(
         null=True,
         blank=True,
+        verbose_name="P3 #",
         help_text="Enter the P3 (Pohl, Patterson, Pelham 2016) number for the species (Lepidoptera \
             only)",
+    )
+    ps = models.CharField(
+        null=True,
+        blank=True,
+        verbose_name="PS #",
+        help_text="Enter the Phylogenetic Sequence (Pohl and Nanz, 2023) number for the species \
+            (Lepidoptera only)",
     )
 
     class Meta:
@@ -162,6 +173,8 @@ class Subspecies(TimeStampMixin, TaxonomyBase):
         mona (str): The MONA (Hodges) number for the subspecies (Lepidoptera only).
         p3 (str): The P3 (Pohl, Patterson, Pelham 2016) number for the subspecies (Lepidoptera
         only).
+        ps (str): The Phylogenetic Sequence (Pohl and Nanz, 2023) number for the subspecies
+        (Lepidoptera only).
     """
 
     species = models.ForeignKey(
@@ -173,14 +186,24 @@ class Subspecies(TimeStampMixin, TaxonomyBase):
     mona = models.CharField(
         null=True,
         blank=True,
+        verbose_name="MONA #",
         help_text="Enter the MONA (Hodges) number for the subspecies (Lepidoptera only). If it \
             lacks its own MONA number, use the nominate species' number",
     )
     p3 = models.CharField(
         null=True,
         blank=True,
-        help_text="Enter the P3 (Pohl, Patterson, Pelham 2016) number for the species (Lepidoptera \
-            only). If it lacks its own P3 number, use the nominate species' number.",
+        verbose_name="P3 #",
+        help_text="Enter the P3 (Pohl, Patterson, Pelham 2016) number for the subspecies \
+            (Lepidoptera only). If it lacks its own P3 number, use the nominate species' number",
+    )
+    ps = models.CharField(
+        null=True,
+        blank=True,
+        verbose_name="PS #",
+        help_text="Enter the Phylogenetic Sequence (Pohl and Nanz, 2023) number for the subspecies \
+            (Lepidoptera only). If it lacks its own Phylogenetic Sequence number, use the \
+            nominate species' number",
     )
 
     class Meta:

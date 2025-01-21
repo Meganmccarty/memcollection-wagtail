@@ -9,11 +9,22 @@ from geography.views import (
     CountriesAPIViewSet,
     GPSAPIViewSet,
     LocalitiesAPIViewSet,
+    NestedCountiesAPIViewSet,
+    NestedGPSAPIViewSet,
+    NestedLocalitiesAPIViewSet,
+    NestedStatesAPIViewSet,
     StatesAPIViewSet,
 )
+from specimens.views import PeopleAPIViewSet, SpecimenRecordAPIViewSet
 from taxonomy.views import (
     FamiliesAPIViewSet,
     GeneraAPIViewSet,
+    NestedFamiliesAPIViewSet,
+    NestedGeneraAPIViewSet,
+    NestedSpeciesAPIViewSet,
+    NestedSubfamiliesAPIViewSet,
+    NestedSubspeciesAPIViewSet,
+    NestedTribesAPIViewSet,
     OrdersAPIViewSet,
     SpeciesAPIViewSet,
     SubfamiliesAPIViewSet,
@@ -36,16 +47,30 @@ api_router.register_endpoint("documents", DocumentsAPIViewSet)
 # Custom endpoints for the geography app
 api_router.register_endpoint("countries", CountriesAPIViewSet)
 api_router.register_endpoint("states", StatesAPIViewSet)
+api_router.register_endpoint("nested-states", NestedStatesAPIViewSet)
 api_router.register_endpoint("counties", CountiesAPIViewSet)
+api_router.register_endpoint("nested-counties", NestedCountiesAPIViewSet)
 api_router.register_endpoint("localities", LocalitiesAPIViewSet)
+api_router.register_endpoint("nested-localities", NestedLocalitiesAPIViewSet)
 api_router.register_endpoint("gps-coordinates", GPSAPIViewSet)
+api_router.register_endpoint("nested-gps-coordinates", NestedGPSAPIViewSet)
 api_router.register_endpoint("collecting-trips", CollectingTripsAPIViewSet)
+
+# Custom endpoints for the specimens app
+api_router.register_endpoint("people", PeopleAPIViewSet)
+api_router.register_endpoint("specimen-records", SpecimenRecordAPIViewSet)
 
 # Custom endpoints for the taxonomy app
 api_router.register_endpoint("orders", OrdersAPIViewSet)
 api_router.register_endpoint("families", FamiliesAPIViewSet)
+api_router.register_endpoint("nested-families", NestedFamiliesAPIViewSet)
 api_router.register_endpoint("subfamilies", SubfamiliesAPIViewSet)
+api_router.register_endpoint("nested-subfamilies", NestedSubfamiliesAPIViewSet)
 api_router.register_endpoint("tribes", TribesAPIViewSet)
+api_router.register_endpoint("nested-tribes", NestedTribesAPIViewSet)
 api_router.register_endpoint("genera", GeneraAPIViewSet)
+api_router.register_endpoint("nested-genera", NestedGeneraAPIViewSet)
 api_router.register_endpoint("species", SpeciesAPIViewSet)
+api_router.register_endpoint("nested-species", NestedSpeciesAPIViewSet)
 api_router.register_endpoint("subspecies", SubspeciesAPIViewSet)
+api_router.register_endpoint("nested-subspecies", NestedSubspeciesAPIViewSet)
