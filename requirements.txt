@@ -4,5 +4,5 @@ wagtail>=6.3,<6.4
 gunicorn>=21.2.0,<24.0.0
 psycopg2==2.9.10
 dj-database-url>=2.1.0,<3.0.0
-whitenoise>=5.0,<6.9
+whitenoise>=5.0,<6.10
 django-storages[s3]>=1.14.0,<2.0.0
