@@ -63,6 +63,9 @@ format: ## Formats Python code using Black formatter
 test: ## Tests Python code
 	docker compose run --rm web coverage run manage.py test --verbosity=2 --pattern="test_*.py"
 
+test-deprecation: ## Tests Python code and includes deprecation warnings
+	docker compose run --rm web python -Wa manage.py test
+
 coverage: ## Shows test coverage
 	docker compose run --rm web coverage report -m --omit=*/migrations/*,*/tests/*
 
