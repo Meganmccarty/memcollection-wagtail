@@ -3,5 +3,5 @@ black==25.1.0
 coverage==7.8.2
 flake8==7.2.0
 psycopg2-binary==2.9.10
-python-dotenv==1.0.1
+python-dotenv==1.1.0
 wagtail>=6.3,<6.4
