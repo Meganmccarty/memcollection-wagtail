@@ -79,3 +79,7 @@ fly-secrets: ## Sets up Fly.io to use the .env.production secrets file
 fly-deploy: ## Deploys to Fly.io
 	make fly-secrets && \
 	fly deploy --ha=false
+
+# Sphinx commands
+build-docs: ## Builds the Sphinx docs as static HTML files
+	docker compose run --rm web sphinx-build -M html docs/source/ docs/build/

@@ -10,13 +10,17 @@ from taxonomy.models import Genus, Family, Order, Species, Subfamily, Subspecies
 
 
 class Person(TimeStampMixin):
-    """A model for a Person object.
+    """A model that represents a Person object.
 
     Attributes:
         first_name (str): The person's first name.
         middle_initial (str): The person's middle initial.
         last_name (str): The person's last name.
         suffix (str): The person's suffix (if they have one).
+        date_created (datetime): The date when the object instance was created. Inherited from \
+                                 TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+                                  from TimeStampMixin.
     """
 
     first_name = models.CharField(
@@ -45,16 +49,19 @@ class Person(TimeStampMixin):
         verbose_name_plural = "People"
 
     def __str__(self):
-        """Returns the string representation of a Person object."""
+        """Returns a string representation of a Person object instance.
+
+        Returns:
+            A string that refers to a Person object instance.
+        """
 
         return self.full_name
 
     @property
     def collector_name(self):
-        """Formats a person's name for a specimen label.
+        """A person's name formatted for a specimen label.
 
-        Returns:
-            A person's name in the correct collector format.
+        The format is a person's first initial, last name, and suffix (if they have one).
         """
 
         first_initial = self.first_name[0]
@@ -63,10 +70,10 @@ class Person(TimeStampMixin):
 
     @property
     def full_name(self):
-        """Set's a person's full name.
+        """A person's full name.
 
-        Returns:
-            A person's full name.
+        The format is a person's first name, middle initial (if one is provided), last name, and
+        suffix (if they have one).
         """
 
         middle_initial = f" {self.middle_initial}." if self.middle_initial else ""
@@ -82,8 +89,8 @@ class SpecimenRecord(TimeStampMixin):
     the conditions under which it was captured.
 
     Attributes:
-        usi (str): The Unique Specimen Identifier (USI) number. I am setting it as my initials
-                   followed by a dash and a number (which I increment with each specimen added to
+        usi (str): The Unique Specimen Identifier (USI) number. I am setting it as my initials \
+                   followed by a dash and a number (which I increment with each specimen added to \
                    the collection).
         order (Order): The order to which the specimen belongs.
         family (Family): The family to which the specimen belongs.
@@ -91,7 +98,7 @@ class SpecimenRecord(TimeStampMixin):
         tribe (Tribe): The tribe to which the specimen belongs.
         genus (Genus): The genus to which the specimen belongs.
         species (Species): The species to which the specimen belongs.
-        subspecies (Subspecies): The subspecies to which the specimen belongs, if the species has
+        subspecies (Subspecies): The subspecies to which the specimen belongs, if the species has \
                                  one.
         determiner (Person): The person who determined (identified) the specimen.
         determined_year (int): The year the determination was made.
@@ -115,12 +122,16 @@ class SpecimenRecord(TimeStampMixin):
         collector (Person): The collector(s) who collected the specimen.
         method (str): The method used to collect the specimen.
         weather (str): A brief description of the weather conditions during the specimen's capture.
-        temperature (str): The outdoor temperature during the specimen's capture. It is a string
-        rather than a float so that I have control on whether or not a decimal point on the field
-        is serialized.
+        temperature (str): The outdoor temperature during the specimen's capture. It is a string \
+                           rather than a float so that I have control on whether or not a decimal \
+                           point on the field is serialized.
         time_of_day (str): The time of day (or night) the specimen was captured.
         habitat (str): The habitat details of where the specimen was captured.
-        notes (str): Any additional notes about the specimen..
+        notes (str): Any additional notes about the specimen.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+                                 TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+                                  from TimeStampMixin.
     """
 
     # MEM number
@@ -398,15 +409,16 @@ class SpecimenRecord(TimeStampMixin):
         ordering = ["usi"]
 
     def __str__(self):
+        """Returns a string representation of a SpecimenRecord object instance.
+
+        Returns:
+            A string that refers to a SpecimenRecord object instance.
+        """
         return self.usi
 
     @property
     def identified(self):
-        """Determines whether a specimen has been identified to species.
-
-        Returns:
-            A boolean.
-        """
+        """A boolean representing whether or not a specimen is identified to species."""
 
         if self.species:
             return True
@@ -415,14 +427,12 @@ class SpecimenRecord(TimeStampMixin):
 
     @property
     def collected_date(self):
-        """Creates a collected date for specimen labels.
+        """The collected date used for specimen labels.
 
         Because the day, month, and year fields are optional, these fields must be checked. Fields
         with non-null values are used to construct the final formatted date.
 
-        Returns:
-            The constructed collected date, either as a string (if the day or month is known) or an
-            integer (if only the year is known).
+        Examples of possible dates include "1-Jan-2000", "Jan 2000", and "2000".
         """
 
         if self.day:
@@ -434,14 +444,12 @@ class SpecimenRecord(TimeStampMixin):
 
     @property
     def full_date(self):
-        """Creates the full date on which a specimen was collected.
+        """The full date on which a specimen was collected.
 
         Because the day, month, and year fields are optional, these fields must be checked. Fields
         with non-null values are used to construct the final formatted date.
 
-        Returns:
-            The constructed full date, either as a string (if the day or month is known) or an
-            integer (if only the year is known).
+        Examples of possible dates include "1 January 2000", "January 2000", and "2000".
         """
 
         if self.day:
@@ -453,15 +461,12 @@ class SpecimenRecord(TimeStampMixin):
 
     @property
     def num_date(self):
-        """Formats the date as YYYY-MM-DD.
+        """The date on which a specimen was collected, formatted as YYYY-MM-DD.
 
         Because the day, month, and year fields are optional, these fields must be checked. Fields
         with non-null values are used to construct the final numerical date.
-
-        Returns:
-            The constructed numerical date, either as a string (if the day or month is known) or an
-            integer (if only the year is known).
         """
+
         month = self.month
 
         # If the month field is not empty, convert it to a number
@@ -485,11 +490,8 @@ class SpecimenRecord(TimeStampMixin):
 
     @property
     def collectors(self):
-        """Joins all collectors for a specimen into a string.
+        """All collector names for a given specimen joined into a string."""
 
-        Returns:
-            A string of all collectors for a given specimen using their collector names.
-        """
         return ", ".join(
             [str(collector.collector_name) for collector in self.collector.all()]
         )
@@ -498,12 +500,7 @@ class SpecimenRecord(TimeStampMixin):
 
     @property
     def temp_F(self):
-        """Formats the temperature field into Fahrenheit.
-
-        Returns:
-            A string either containing the formatted temperature (or an empty string if the
-            temperature field is empty).
-        """
+        """Temperature with "F" (Fahrenheit) appended to the end."""
 
         if self.temperature:
             # When putting the initial temperature in as Fahrenheit, I don't usually put a decimal,
@@ -523,12 +520,8 @@ class SpecimenRecord(TimeStampMixin):
 
     @property
     def temp_C(self):
-        """Formats the temperature field into Celsius.
+        """Temperature with "C" (Celsius) appended to the end."""
 
-        Returns:
-            A string either containing the formatted temperature (or an empty string if the
-            temperature field is empty).
-        """
         if self.temperature:
             temp_float = float(self.temperature)
             celsius = (temp_float - 32) * 5 / 9
