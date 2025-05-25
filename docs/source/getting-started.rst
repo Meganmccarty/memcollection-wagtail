@@ -7,7 +7,7 @@ my code, as I am very liable to forget stuff.)
 
 First, clone this repo from GitHub:
 
-.. code-block:: console
+.. code::
 
     git clone git@github.com:Meganmccarty/memcollection-wagtail.git
 
@@ -19,7 +19,7 @@ a few environment variables to be present to properly run.
 
 After creating the ``.env`` file, add the following variables to it:
 
-.. code-block::
+.. code::
 
     DATABASE_NAME=postgres
     DATABASE_PASSWORD=postgres
@@ -46,25 +46,25 @@ Building and Spinning Up Containers
 
 To build an image (non-M chip), run
 
-.. code-block:: console
+.. code::
 
     make build
 
 or, if on an M chip, run
 
-.. code-block:: console
+.. code::
 
     make mac-build
 
 Once the image finishes building, run
 
-.. code-block:: console
+.. code::
 
     make up
 
 or
 
-.. code-block:: console
+.. code::
 
     make mac-up
 
@@ -77,14 +77,14 @@ http://localhost:8000/.
 You may need to run migrations before anything else. To do so, run the following in a separate
 terminal:
 
-.. code-block:: console
+.. code::
 
     make migrations
     make migrate
 
 You'll then need to create a user account to access the Wagtail admin. In the terminal, run:
 
-.. code-block:: console
+.. code::
 
     make createsuperuser
 
@@ -99,7 +99,7 @@ To stop the containers, press ``Ctrl+C`` in the terminal where your containers a
 
 If you want to tear down the containers, simply run the following:
 
-.. code-block:: console
+.. code::
 
     make down
 
@@ -108,7 +108,7 @@ database, as they are stored on a volume (``/postgres-data``) within the project
 
 If you find you want to wipe out everything, simply run:
 
-.. code-block:: console
+.. code::
 
     make prune
 
@@ -116,12 +116,12 @@ This will prune your system, containers, images, and volumes. Be careful with th
 
 If, while developing, you find you need to rebuild an image without caching, there's a command for that:
 
-.. code-block:: console
+.. code::
 
     make build-no-cache
 
 or
 
-.. code-block:: console
+.. code::
 
     make mac-build-no-cache

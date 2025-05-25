@@ -18,7 +18,7 @@ As I've said, this is a perpetual, work-in-progress project. Hopefully, this is 
 recreate this project from scratch...
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
    :caption: Contents:
 
    getting-started

@@ -36,12 +36,12 @@ to get me over the hump of deployment errors.
 
 After the initial setup is done, you can run
 
-.. code-block:: console
+.. code::
 
     make fly-auth
 
 to authenticate (if you aren't already authenticated). Once that's done, you can deploy by running
 
-.. code-block:: console
+.. code::
 
     make fly-deploy
