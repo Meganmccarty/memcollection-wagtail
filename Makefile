@@ -80,6 +80,9 @@ fly-deploy: ## Deploys to Fly.io
 	make fly-secrets && \
 	fly deploy --ha=false
 
-# Sphinx commands
+# Doc and changelog commands
+build-changelog: ## Builds an updated changelog
+	npm run changelog
+
 build-docs: ## Builds the Sphinx docs as static HTML files
 	docker compose run --rm web sphinx-build -M html docs/source/ docs/build/

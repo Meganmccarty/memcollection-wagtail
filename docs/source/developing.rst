@@ -1,6 +1,9 @@
 Developing
 ==========
 
+Creating a New Django app
+-------------------------
+
 To create a new Django app, you can run
 
 .. code::
@@ -80,5 +83,77 @@ running
     make build-docs
 
 This will create a ``build/`` folder under ``docs/``. Opening ``build/html/index.html`` in your
-browser of choice will allow you to navigate the docs as though they are hosted on a server or S3
-bucket.
+browser of choice will allow you to navigate through the docs as though they are hosted on a server
+or S3 bucket.
+
+``git-flow``
+------------
+
+I am using git-flow to manage changes in this project.
+
+Feature Branches
+****************
+
+You can create a new feature branch off of ``develop`` by running
+
+.. code::
+
+    git flow feature start NAME-OF-YOUR-FEATURE-BRANCH-HERE
+
+When you're ready to merge your changes back into develop, publish the feature branch on GitHub by
+running
+
+.. code::
+
+    git flow feature publish NAME-OF-YOUR-FEATURE-BRANCH-HERE
+
+Open a PR on GitHub; this will lint, format, and test the code before it is merged back into
+``develop``. You can merge your feature branch by running
+
+.. code::
+
+    git flow feature finish NAME-OF-YOUR-FEATURE-BRANCH-HERE
+
+Make sure to push your changes after merging.
+
+Release Branches
+****************
+
+To start a release, simply run
+
+.. code::
+
+    git flow release start VERSION-NUMBER-HERE
+
+Make sure to update the version number in ``docs/source/conf.py``,
+``memcollection/settings/base.py``, and ``package.json`` and commit those changes.
+
+Then, publish the release branch by running
+
+.. code::
+
+    git flow release publish VERSION-NUMBER-HERE
+
+Open a PR on GitHub to merge the release into ``main``. Again, the code will be linted, formatted,
+and tested.
+
+If all tests pass, go ahead and run
+
+.. code::
+
+    git flow release finish VERSION-NUMBER-HERE
+
+Follow the prompts in the terminal when merging the release back into both the ``develop`` and ``main``
+branches. If prompted for a message, make sure to put the version number of the release into the
+commit message.
+
+Once that's done, make sure to push both these branches, as well as the tags.
+
+Then, on the ``main`` branch, you can update the changelog and docs by running
+
+.. code::
+
+    make build-changelog
+    make build-docs
+
+Go ahead and commit and push any changes made to the ``main`` branch.

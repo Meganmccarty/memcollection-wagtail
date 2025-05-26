@@ -1,0 +1,12 @@
+{
+    "name": "memcollection-wagtail",
+    "version": "0.4.2",
+    "scripts": {
+        "changelog": "auto-changelog --output docs/source/changelog.md --template docs/source/_templates/default.hbs --commit-limit -p false"
+    },
+    "private": "true",
+    "devDependencies": {
+        "auto-changelog": "^2.5.0"
+    },
+    "type": "module"
+}

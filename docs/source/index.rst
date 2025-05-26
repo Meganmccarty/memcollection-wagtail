@@ -18,11 +18,12 @@ As I've said, this is a perpetual, work-in-progress project. Hopefully, this is 
 recreate this project from scratch...
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Contents:
 
    getting-started
    developing
    cicd
    deploying
+   changelog
    reference/index
