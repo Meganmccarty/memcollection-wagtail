@@ -7,11 +7,15 @@ from mixins.models import TimeStampMixin
 
 
 class Country(TimeStampMixin):
-    """A model for a Country object. Inherits from the abstract TimeStampMixin class.
+    """A model that represents a Country object.
 
     Attributes:
         name (str): The full name of the country.
         abbr (str): The country's 3-letter abbreviation.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+            TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+            from TimeStampMixin.
     """
 
     name = models.CharField(max_length=50, help_text="Enter the name of the country")
@@ -24,7 +28,7 @@ class Country(TimeStampMixin):
         verbose_name_plural = "Countries"
 
     def __str__(self):
-        """This method returns a string representation of an instance of the Country object.
+        """Returns a string representation of a Country object instance.
 
         Returns:
             A string that refers to a Country object instance.
@@ -33,12 +37,16 @@ class Country(TimeStampMixin):
 
 
 class State(TimeStampMixin):
-    """A model for a State object. Inherits from the abstract TimeStampMixin class.
+    """A model that represents a State object.
 
     Attributes:
         country (Country): The country to which the state belongs.
         name (str): The full name of the state.
         abbr (str): The state's abbreviation (should be 2 letters).
+        date_created (datetime): The date when the object instance was created. Inherited from \
+            TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+            from TimeStampMixin.
     """
 
     country = models.ForeignKey(
@@ -59,7 +67,7 @@ class State(TimeStampMixin):
         ordering = ["name"]
 
     def __str__(self):
-        """This method returns a string representation of an instance of the State object.
+        """Returns a string representation of a State object instance.
 
         Returns:
             A string that refers to a State object instance.
@@ -68,11 +76,15 @@ class State(TimeStampMixin):
 
 
 class County(TimeStampMixin):
-    """A model for a County object. Inherits from the abstract TimeStampMixin class.
+    """A model that represents a County object.
 
     Attributes:
         state (State): The state to which the county belongs.
         name (str): The full name of the county.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+            TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+            from TimeStampMixin.
     """
 
     state = models.ForeignKey(
@@ -90,7 +102,7 @@ class County(TimeStampMixin):
         verbose_name_plural = "Counties"
 
     def __str__(self):
-        """This method returns a string representation of an instance of the County object.
+        """Returns a string representation of a County object instance.
 
         It uses both a property of the County object (full_name) as well as the state abbreviation
         to which this County object instance belongs (state.abbr). For example, if the county is
@@ -103,7 +115,7 @@ class County(TimeStampMixin):
 
     @property
     def abbr(self):
-        """This method generates the correct abbreviation depending on what state the county is in.
+        """The county's abbreviation ('Co.', 'Par.', or 'Boro.').
 
         Most states in the US are broken up into smaller units called counties, but some states
         call their smaller divisions parishes (Louisiana) or boroughs (Alaska).
@@ -115,10 +127,6 @@ class County(TimeStampMixin):
 
         Note: Some Alaskan areas are subdivided into census areas instead of boroughs. For those
         units, no abbreviation will be generated.
-
-        Returns:
-            The county's correct abbreviation as a string. For example, 'Co.', 'Par.', 'Boro.', or
-            '' (the last one in the case the unit is a census area in Alaska).
         """
 
         county_abbr = ""
@@ -137,14 +145,11 @@ class County(TimeStampMixin):
 
     @property
     def county_line(self):
-        """This method determines whether one or two counties are listed within the name field.
+        """The county's border (if two counties are listed within the name field).
 
         There are cases when a specimen may have been collected on the border between two counties
-        (on the county line). This needs to be included on the specimen label.
-
-        Returns:
-            A string containing the word "line" if two counties are listed within the name field.
-            If only one is listed, an empty string is returned.
+        (on the county line). This needs to be included on the specimen label by indicating the word
+        'line'.
         """
 
         # If there are two counties listed as one in the name, return the word "line"
@@ -155,12 +160,10 @@ class County(TimeStampMixin):
 
     @property
     def full_name(self):
-        """This method combines the county's name, abbreviation (if it has one), and the word "line"
-         (if there are two counties listed in the name) into one property
+        """A county's full name.
 
-        Returns:
-            The county's name, abbreviation (if it has one), and the word "line" (if there are
-            two counties listed in the name) as a single string
+        It is formatted as the county's name, abbreviation (if it has one), and the word "line" (if
+        there are two counties listed in the name).
         """
 
         abbr = " " + self.abbr if self.abbr else ""
@@ -170,7 +173,7 @@ class County(TimeStampMixin):
 
 
 class Locality(TimeStampMixin):
-    """A model for a Locality object. Inherits from the abstract TimeStampMixin class.
+    """A model that represents a Locality object.
 
     This class contains validation in the Wagtail admin to prevent a user from adding multiple
     regions to the locality. This is a personal preference for how I want the data to be
@@ -191,6 +194,10 @@ class Locality(TimeStampMixin):
         name (str): The name of the locality.
         range (str): The distance and direction of the locality from the nearest town.
         town (str): The nearest town to the locality.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+            TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+            from TimeStampMixin.
     """
 
     country = models.ForeignKey(
@@ -227,7 +234,7 @@ class Locality(TimeStampMixin):
         verbose_name_plural = "Localities"
 
     def __str__(self):
-        """This method returns a string representation of an instance of the Locality object.
+        """Returns a string representation of a Locality object instance.
 
         Because each field for a Locality object instance is optional, each field must be first
         checked to see if it is null. If not null, then it is included as part of the string
@@ -258,7 +265,7 @@ class Locality(TimeStampMixin):
         return "{}{}{}{}".format(name, range, town, region)
 
     def clean(self):
-        """This method modifies the default Django clean() method to include some custom validation.
+        """Modifies the default Django clean() method to include some custom validation.
 
         Because I don't want a locality to belong to more than one region (whether that be county,
         state, or country), a ValidationError will be raised if two or more regions are selected
@@ -294,20 +301,25 @@ class Locality(TimeStampMixin):
 
 
 class GPS(TimeStampMixin):
-    """A model for a GPS object. Inherits from the abstract TimeStampMixin class.
+    """A model that represents a GPS object.
 
     Note: The latitude and longitude fields are optional, as there are cases where elevation or a
     range of elevations are known, but GPS coordinates were not taken.
 
     Attributes:
         locality (Locality): The locality to which the GPS object instance belongs.
-        latitude (str): The latitude part of the GPS coordinates. It is a string rather than a float
-        so that I have control on the exact number of decimal points when the field is serialized.
-        longidute (str): The longitude part of the GPS coordinates. It is a string rather than a
-        float so that I have control on the exact number of decimal points when the field is
-        serialized.
-        elevation (str): The elevation of the GPS coordinates. It is a string rather than an integer
-        because there are some cases where a range of elevations are provided.
+        latitude (str): The latitude part of the GPS coordinates. It is a string rather than a \
+            float so that I have control on the exact number of decimal points when the field is \
+            serialized.
+        longitude (str): The longitude part of the GPS coordinates. It is a string rather than a \
+            float so that I have control on the exact number of decimal points when the field is \
+            serialized.
+        elevation (str): The elevation of the GPS coordinates. It is a string rather than an \
+            integer because there are some cases where a range of elevations are provided.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+            TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+            from TimeStampMixin.
     """
 
     locality = models.ForeignKey(
@@ -335,7 +347,7 @@ class GPS(TimeStampMixin):
         verbose_name_plural = "GPS coordinates"
 
     def __str__(self):
-        """This method returns a string representation of an instance of the GPS object.
+        """Returns a string representation of a GPS object instance.
 
         Because the latitude and longitude fields are optional, each must be checked to see if
         it is null. If not null, then it is included as part of the string returned. Else, an empty
@@ -357,16 +369,13 @@ class GPS(TimeStampMixin):
 
     @property
     def elevation_meters(self):
-        """This method adds an "m" (meters) at the end of the elevation field.
+        """Adds an "m" (meters) at the end of the elevation field."""
 
-        Returns:
-            A string of the elevation with an "m" attached to the end.
-        """
         return f"{self.elevation}m"
 
 
 class CollectingTrip(TimeStampMixin):
-    """A model for a CollectingTrip object. Inherits from the abstract TimeStampMixin class.
+    """A model that represents a CollectingTrip object.
 
     Attributes:
         name (str): The name of the collecting trip.
@@ -374,6 +383,10 @@ class CollectingTrip(TimeStampMixin):
         start_date (date): The start date of the trip.
         end_date (date): The end date of the trip.
         notes (str): A rich text field for documenting trip notes.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+            TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+            from TimeStampMixin.
     """
 
     name = models.CharField(max_length=50, help_text="Enter a name for the trip")
@@ -391,7 +404,7 @@ class CollectingTrip(TimeStampMixin):
         ordering = ["name"]
 
     def __str__(self):
-        """This method returns a string representation of an instance of the CollectingTrip object.
+        """Returns a string representation of a CollectingTrip object instance.
 
         Returns:
             A string that refers to a CollectingTrip object instance.
@@ -400,9 +413,6 @@ class CollectingTrip(TimeStampMixin):
 
     @property
     def slug(self):
-        """This method slugifies the name of an instance of the CollectingTrip object.
+        """Slugifies the name of a CollectingTrip object instance."""
 
-        Returns:
-            A slugified string of a CollectingTrip object instance's name.
-        """
         return slugify(self.name)
