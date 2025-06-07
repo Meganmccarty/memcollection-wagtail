@@ -1,0 +1,25 @@
+name: Fly Deploy Docs
+on: push
+
+jobs:
+  deploy-docs:
+    name: Deploy docs
+    runs-on: ubuntu-latest
+    concurrency: deploy-group
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4.1.0
+        with:
+          python-version: 3.12
+      - name: Set up Fly.io
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Install Python dependencies
+        run: pip --disable-pip-version-check install -r requirements-dev.txt
+      - name: Build docs
+        run: sphinx-build -M html docs/source/ docs/build/
+      - name: Deploy docs to Fly.io
+        run: flyctl deploy --ha=false --remote-only --config=docs/fly.toml --dockerfile=docs/Dockerfile --app=memcollection-docs --debug --verbose
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_DOCS_TOKEN }}
