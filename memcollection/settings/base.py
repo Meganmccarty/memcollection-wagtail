@@ -36,6 +36,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 INSTALLED_APPS = [
     "geography",
     "home",
+    "pages",
     "search",
     "specimens",
     "taxonomy",
@@ -194,3 +195,14 @@ WAGTAILDOCS_EXTENSIONS = [
     "xlsx",
     "zip",
 ]
+
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    "default": {
+        "WIDGET": "wagtail.admin.rich_text.DraftailRichTextArea",
+        "OPTIONS": {
+            "features": [
+                "bold", "italic", "h2", "h3", "h4", "ol", "ul", "hr", "link", "footnotes",
+            ],
+        },
+    }
+}

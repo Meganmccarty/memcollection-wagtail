@@ -1,5 +1,5 @@
 from wagtail import hooks
-from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 from wagtail.snippets.models import register_snippet
 
@@ -117,10 +117,6 @@ class SpecimenRecordSnippet(SnippetViewSet):
             ],
             heading="Locality Details",
         ),
-    ]
-
-    content_panels = [
-        InlinePanel("footnotes", label="Footnotes"),
     ]
 
 

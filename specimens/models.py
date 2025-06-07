@@ -400,18 +400,6 @@ class SpecimenRecord(TimeStampMixin):
         default="",
         blank=True,
         help_text="Enter habitat details where the specimen was collected",
-        features=[
-            "h2",
-            "h3",
-            "h4",
-            "bold",
-            "italic",
-            "ol",
-            "ul",
-            "hr",
-            "link",
-            "footnotes",
-        ],
     )
     notes = RichTextField(
         default="", blank=True, help_text="Enter any other notes about the specimen"
