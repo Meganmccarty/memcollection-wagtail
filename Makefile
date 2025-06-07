@@ -63,6 +63,9 @@ format: ## Formats Python code using Black formatter
 test: ## Tests Python code
 	docker compose run --rm web coverage run manage.py test --verbosity=2 --pattern="test_*.py"
 
+test-deprecation: ## Tests Python code and includes deprecation warnings
+	docker compose run --rm web python -Wa manage.py test
+
 coverage: ## Shows test coverage
 	docker compose run --rm web coverage report -m --omit=*/migrations/*,*/tests/*
 
@@ -76,3 +79,10 @@ fly-secrets: ## Sets up Fly.io to use the .env.production secrets file
 fly-deploy: ## Deploys to Fly.io
 	make fly-secrets && \
 	fly deploy --ha=false
+
+# Doc and changelog commands
+build-changelog: ## Builds an updated changelog
+	npm run changelog
+
+build-docs: ## Builds the Sphinx docs as static HTML files
+	docker compose run --rm web sphinx-build -M html docs/source/ docs/build/

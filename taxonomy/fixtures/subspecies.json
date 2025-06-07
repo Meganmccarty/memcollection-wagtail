@@ -5,12 +5,13 @@
         "fields": {
             "date_created": "2024-11-23T22:18:38.449Z",
             "date_modified": "2024-11-23T22:18:38.449Z",
-            "name": "coloro",
+            "name": "rudkini",
             "common_name": "Desert Black Swallowtail",
-            "authority": "(Wright, 1905)",
+            "authority": "Comstock, 1935",
             "species": 3,
-            "mona": "4159",
-            "p3": "770301"
+            "mona": "4161",
+            "p3": "770301",
+            "ps": "77a0366"
         }
     }
 ]

@@ -21,7 +21,7 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Project version
-VERSION = "0.4.2"
+VERSION = "0.5.0"
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "geography",
     "home",
     "search",
+    "specimens",
     "taxonomy",
     "wagtail.api.v2",
     "wagtail.contrib.forms",

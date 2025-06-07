@@ -31,22 +31,43 @@ class TaxonomyBase(models.Model):
         ordering = ["name"]
 
     def __str__(self):
-        """This method returns a string representation of the TaxonomyBase object."""
+        """Returns a string representation of a TaxonomyBase object instance.
+
+        Returns:
+            A string that refers to a Taxonomy object instance.
+        """
 
         return self.name
 
 
 class Order(TimeStampMixin, TaxonomyBase):
-    """A model for an Order object. Inherits from both the TimeStampMixin and TaxonomyBase."""
+    """A model that represents an Order object.
+
+    Attributes:
+        name (str): The scientific name of the taxon.
+        common_name (str): The common name of the taxon, if it has one.
+        authority (str): The authority of the taxon.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+                                 TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+                                  from TimeStampMixin.
+    """
 
     pass
 
 
 class Family(TimeStampMixin, TaxonomyBase):
-    """A model for a Family object. Inherits from both the TimeStampMixin and TaxonomyBase.
+    """A model that represents a Family object.
 
     Attributes:
         order (Order): The order to which the family belongs.
+        name (str): The scientific name of the taxon.
+        common_name (str): The common name of the taxon, if it has one.
+        authority (str): The authority of the taxon.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+                                 TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+                                  from TimeStampMixin.
     """
 
     order = models.ForeignKey(
@@ -61,10 +82,17 @@ class Family(TimeStampMixin, TaxonomyBase):
 
 
 class Subfamily(TimeStampMixin, TaxonomyBase):
-    """A model for a Subfamily object. Inherits from both the TimeStampMixin and TaxonomyBase.
+    """A model that represents a Subfamily object.
 
     Attributes:
         family (Family): The family to which the subfamily belongs.
+        name (str): The scientific name of the taxon.
+        common_name (str): The common name of the taxon, if it has one.
+        authority (str): The authority of the taxon.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+                                 TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+                                  from TimeStampMixin.
     """
 
     family = models.ForeignKey(
@@ -79,10 +107,17 @@ class Subfamily(TimeStampMixin, TaxonomyBase):
 
 
 class Tribe(TimeStampMixin, TaxonomyBase):
-    """A model for a Tribe object. Inherits from both the TimeStampMixin and TaxonomyBase.
+    """A model that represents a Tribe object.
 
     Attributes:
         subfamily (Subfamily): The subfamily to which the tribe belongs.
+        name (str): The scientific name of the taxon.
+        common_name (str): The common name of the taxon, if it has one.
+        authority (str): The authority of the taxon.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+                                 TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+                                  from TimeStampMixin.
     """
 
     subfamily = models.ForeignKey(
@@ -94,10 +129,17 @@ class Tribe(TimeStampMixin, TaxonomyBase):
 
 
 class Genus(TimeStampMixin, TaxonomyBase):
-    """A model for a Genus object. Inherits from both the TimeStampMixin and TaxonomyBase.
+    """A model that represents a Genus object.
 
     Attributes:
         tribe (Tribe): The tribe to which the genus belongs.
+        name (str): The scientific name of the taxon.
+        common_name (str): The common name of the taxon, if it has one.
+        authority (str): The authority of the taxon.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+                                 TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+                                  from TimeStampMixin.
     """
 
     tribe = models.ForeignKey(
@@ -112,12 +154,21 @@ class Genus(TimeStampMixin, TaxonomyBase):
 
 
 class Species(TimeStampMixin, TaxonomyBase):
-    """A model for a Species object. Inherits from both the TimeStampMixin and TaxonomyBase.
+    """A model that represents a Species object.
 
     Attributes:
         genus (Genus): The genus to which the species belongs.
         mona (str): The MONA (Hodges) number for the species (Lepidoptera only).
         p3 (str): The P3 (Pohl, Patterson, Pelham 2016) number for the species (Lepidoptera only).
+        ps (str): The Phylogenetic Sequence (Pohl and Nanz, 2023) number for the species
+        (Lepidoptera only).
+        name (str): The scientific name of the taxon.
+        common_name (str): The common name of the taxon, if it has one.
+        authority (str): The authority of the taxon.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+                                 TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+                                  from TimeStampMixin.
     """
 
     genus = models.ForeignKey(
@@ -129,13 +180,22 @@ class Species(TimeStampMixin, TaxonomyBase):
     mona = models.CharField(
         null=True,
         blank=True,
+        verbose_name="MONA #",
         help_text="Enter the MONA (Hodges) number for the species (Lepidoptera only)",
     )
     p3 = models.CharField(
         null=True,
         blank=True,
+        verbose_name="P3 #",
         help_text="Enter the P3 (Pohl, Patterson, Pelham 2016) number for the species (Lepidoptera \
             only)",
+    )
+    ps = models.CharField(
+        null=True,
+        blank=True,
+        verbose_name="PS #",
+        help_text="Enter the Phylogenetic Sequence (Pohl and Nanz, 2023) number for the species \
+            (Lepidoptera only)",
     )
 
     class Meta:
@@ -143,25 +203,38 @@ class Species(TimeStampMixin, TaxonomyBase):
         verbose_name_plural = "Species"
 
     def __str__(self):
-        """This method returns a string representation of the Species object."""
+        """Returns a string representation of a Species object instance.
+
+        Returns:
+            A string that refers to a Species object instance.
+        """
 
         return self.binomial
 
     @property
     def binomial(self):
-        """This method returns the species' binomial."""
+        """The species' binomial (genus + species)."""
 
         return f"{self.genus.name} {self.name}"
 
 
 class Subspecies(TimeStampMixin, TaxonomyBase):
-    """A model for a Subspecies object. Inherits from both the TimeStampMixin and TaxonomyBase.
+    """A model that represents a Subspecies object.
 
     Attributes:
         species (Species): The species to which the subspecies belongs.
         mona (str): The MONA (Hodges) number for the subspecies (Lepidoptera only).
-        p3 (str): The P3 (Pohl, Patterson, Pelham 2016) number for the subspecies (Lepidoptera
-        only).
+        p3 (str): The P3 (Pohl, Patterson, Pelham 2016) number for the subspecies (Lepidoptera \
+                  only).
+        ps (str): The Phylogenetic Sequence (Pohl and Nanz, 2023) number for the subspecies \
+                  (Lepidoptera only).
+        name (str): The scientific name of the taxon.
+        common_name (str): The common name of the taxon, if it has one.
+        authority (str): The authority of the taxon.
+        date_created (datetime): The date when the object instance was created. Inherited from \
+                                 TimeStampMixin.
+        date_modified (datetime): The date when the object instance was last modified. Inherited \
+                                  from TimeStampMixin.
     """
 
     species = models.ForeignKey(
@@ -173,14 +246,24 @@ class Subspecies(TimeStampMixin, TaxonomyBase):
     mona = models.CharField(
         null=True,
         blank=True,
+        verbose_name="MONA #",
         help_text="Enter the MONA (Hodges) number for the subspecies (Lepidoptera only). If it \
             lacks its own MONA number, use the nominate species' number",
     )
     p3 = models.CharField(
         null=True,
         blank=True,
-        help_text="Enter the P3 (Pohl, Patterson, Pelham 2016) number for the species (Lepidoptera \
-            only). If it lacks its own P3 number, use the nominate species' number.",
+        verbose_name="P3 #",
+        help_text="Enter the P3 (Pohl, Patterson, Pelham 2016) number for the subspecies \
+            (Lepidoptera only). If it lacks its own P3 number, use the nominate species' number",
+    )
+    ps = models.CharField(
+        null=True,
+        blank=True,
+        verbose_name="PS #",
+        help_text="Enter the Phylogenetic Sequence (Pohl and Nanz, 2023) number for the subspecies \
+            (Lepidoptera only). If it lacks its own Phylogenetic Sequence number, use the \
+            nominate species' number",
     )
 
     class Meta:
@@ -188,12 +271,16 @@ class Subspecies(TimeStampMixin, TaxonomyBase):
         verbose_name_plural = "Subspecies"
 
     def __str__(self):
-        """This method returns a string representation of the Subspecies object."""
+        """Returns a string representation of a Subspecies object instance.
+
+        Returns:
+            A string that refers to a Subspecies object instance.
+        """
 
         return self.trinomial
 
     @property
     def trinomial(self):
-        """This method returns the subspecies' trinomial."""
+        """The subspecies' trinomial (genus + species + subspecies)."""
 
         return f"{self.species} {self.name}"
