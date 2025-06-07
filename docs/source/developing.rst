@@ -98,6 +98,10 @@ auto-generate a changelog based on my git history. The changelog can be generate
 This will output a file, ``changelog.md``, under ``docs/source/``. Sphinx is configured to
 incorporate this file within the generated docs.
 
+.. note:: auto-changelog doesn't include PRs I create, so I need to manually add my PRs to the
+   outputted file. I add ``<!-- auto-changelog-above -->`` to the top of the changelog so that
+   ``make build-changelog`` doesn't overwrite my changes.
+
 ``git-flow``
 ------------
 
@@ -135,7 +139,7 @@ To start a release, simply run
 
 .. code::
 
-    git flow release start VERSION-NUMBER-HERE
+    git flow release start x.y.z
 
 Make sure to update the version number in ``docs/source/conf.py``,
 ``memcollection/settings/base.py``, and ``package.json`` and commit those changes.
@@ -144,7 +148,7 @@ Then, publish the release branch by running
 
 .. code::
 
-    git flow release publish VERSION-NUMBER-HERE
+    git flow release publish x.y.z
 
 Open a PR on GitHub to merge the release into ``main``. Again, the code will be linted, formatted,
 and tested.
@@ -153,13 +157,16 @@ If all tests pass, go ahead and run
 
 .. code::
 
-    git flow release finish VERSION-NUMBER-HERE
+    git flow release finish x.y.z
 
 Follow the prompts in the terminal when merging the release back into both the ``develop`` and ``main``
-branches. If prompted for a message, make sure to put the version number of the release into the
-commit message.
+branches. For the commit message for the tag, just use the version number (x.y.z) as the message.
 
-Once that's done, make sure to push both these branches, as well as the tags.
+Make sure to push your changes after merging:
+
+.. code::
+
+    git push origin develop main --no-verify --tags
 
 Then, on the ``main`` branch, you can update the changelog and docs by running
 
@@ -168,4 +175,7 @@ Then, on the ``main`` branch, you can update the changelog and docs by running
     make build-changelog
     make build-docs
 
-Go ahead and commit and push any changes made to the ``main`` branch.
+This ensures the release you just merged gets included in the changelog and published in the
+docs.
+
+Go ahead and commit and push these changes made to the ``main`` branch.
