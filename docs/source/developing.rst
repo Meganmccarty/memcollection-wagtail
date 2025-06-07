@@ -142,7 +142,23 @@ To start a release, simply run
     git flow release start x.y.z
 
 Make sure to update the version number in ``docs/source/conf.py``,
-``memcollection/settings/base.py``, and ``package.json`` and commit those changes.
+``memcollection/settings/base.py``, and ``package.json`` and commit those changes:
+
+.. code::
+
+    git add .
+    git commit -m "Bump version in docs/conf.py, memcollection/settings/base.py, and package.json"
+
+Next, update the changelog by running
+
+.. code::
+
+    make build-changelog
+
+Make any necessary changes/adjustments to the auto-generated output, then commit those changes:
+
+    git add .
+    git commit -m "Update changelog"
 
 Then, publish the release branch by running
 
@@ -167,15 +183,3 @@ Make sure to push your changes after merging:
 .. code::
 
     git push origin develop main --no-verify --tags
-
-Then, on the ``main`` branch, you can update the changelog and docs by running
-
-.. code::
-
-    make build-changelog
-    make build-docs
-
-This ensures the release you just merged gets included in the changelog and published in the
-docs.
-
-Go ahead and commit and push these changes made to the ``main`` branch.
