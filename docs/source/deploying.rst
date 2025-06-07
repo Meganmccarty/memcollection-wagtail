@@ -1,9 +1,10 @@
 Deploying
 =========
 
-This project is deployed to `Fly.io <https://fly.io/>`_. GitHub Actions is configured to deploy the
-project whenever changes are pushed to the main branch. (You can see how the commands are configured
-under ``.github/workflows/fly.yaml``.)
+This project (along with its docs!) is deployed to `Fly.io <https://fly.io/>`_. GitHub Actions is
+configured to deploy the project whenever changes are pushed to the main branch. (You can see how
+the commands are configured under ``.github/workflows/fly.yaml`` and
+``.github/workflows/fly-docs.yaml``.)
 
 However, there are still some little quirks I have yet to work out. For example, the only way to
 configure the prod environment variables is to do either one of the following:
@@ -23,7 +24,8 @@ remove this feature once I got GitHub Actions working.)
 
 These steps below are more for me than for anyone else, as they assume you've completed the
 following tasks:
-* Set up hosting for media assets (using `Backblaze B2 Cloud Storage <https://www.backblaze.com/cloud-storage>`_`)
+
+* Set up hosting for media assets (using `Backblaze B2 Cloud Storage <https://www.backblaze.com/cloud-storage>`_)
 * Set up hosting for the actual web app (using Fly.io)
 * Set up a ``.env.production`` file for storing secrets used in the prod environment
 
