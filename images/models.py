@@ -24,6 +24,30 @@ class CustomImage(AbstractImage, TimeStampMixin):
 
     admin_form_fields = Image.admin_form_fields + ("alt_text", "date", "notes")
 
+    @property
+    def x_large(self):
+        return self.get_rendition("max-2000x2000")
+
+    @property
+    def large(self):
+        return self.get_rendition("max-1500x1500")
+
+    @property
+    def medium(self):
+        return self.get_rendition("max-1200x1200")
+
+    @property
+    def small(self):
+        return self.get_rendition("max-900x900")
+
+    @property
+    def x_small(self):
+        return self.get_rendition("max-600x600")
+
+    @property
+    def thumbnail(self):
+        return self.get_rendition("max-300x300")
+
 
 class CustomRendition(AbstractRendition, TimeStampMixin):
     """A customm rendition model that inherits from both Wagtail's AbstractRendition model and my
@@ -115,6 +139,7 @@ class SpecimenRecordImage(CustomImage):
 
     position = models.CharField(max_length=10, choices=Position.choices, default=Position.DORSAL,
         help_text='Select the view of the specimen in the image')
+
 
 
 class InsectImage(BaseLiveImage):
