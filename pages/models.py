@@ -1,6 +1,5 @@
 from django.db import models
 from wagtail.admin.panels import FieldPanel, InlinePanel
-from wagtail.api import APIField
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 
@@ -38,13 +37,25 @@ class SpeciesPage(Page):
         related_name="species_page",
         help_text="Select the species this page is about",
     )
-    taxonomy = RichTextField(default='', blank=True, help_text='Enter taxonomy details')
-    description = RichTextField(default='', blank=True, help_text='Enter species description')
-    distribution = RichTextField(default='', blank=True, help_text='Enter distribution details')
-    seasonality = RichTextField(default='', blank=True, help_text='Enter seasonality details')
-    habitat = RichTextField(default='', blank=True, help_text='Enter the species\' habitat')
-    food = RichTextField(default='', blank=True, help_text='Enter info larval and adult food sources')
-    life_cycle = RichTextField(default='', blank=True, help_text='Enter details about the life cycle')
+    taxonomy = RichTextField(default="", blank=True, help_text="Enter taxonomy details")
+    description = RichTextField(
+        default="", blank=True, help_text="Enter species description"
+    )
+    distribution = RichTextField(
+        default="", blank=True, help_text="Enter distribution details"
+    )
+    seasonality = RichTextField(
+        default="", blank=True, help_text="Enter seasonality details"
+    )
+    habitat = RichTextField(
+        default="", blank=True, help_text="Enter the species' habitat"
+    )
+    food = RichTextField(
+        default="", blank=True, help_text="Enter info larval and adult food sources"
+    )
+    life_cycle = RichTextField(
+        default="", blank=True, help_text="Enter details about the life cycle"
+    )
 
     content_panels = [
         FieldPanel("title"),
@@ -63,4 +74,6 @@ class SpeciesPage(Page):
     def subspecies(self):
         """An array of subspecies that belong to this page's species object."""
 
-        return Subspecies.objects.select_related('species').filter(species__id=self.species.id)
+        return Subspecies.objects.select_related("species").filter(
+            species__id=self.species.id
+        )
