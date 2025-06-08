@@ -147,7 +147,7 @@ Make sure to update the version number in ``docs/source/conf.py``,
 .. code::
 
     git add .
-    git commit -m "Bump version in docs/conf.py, memcollection/settings/base.py, and package.json"
+    git commit -m "Bump version in docs/source/conf.py, memcollection/settings/base.py, and package.json"
 
 Next, update the changelog by running
 
@@ -156,6 +156,8 @@ Next, update the changelog by running
     make build-changelog
 
 Make any necessary changes/adjustments to the auto-generated output, then commit those changes:
+
+.. code::
 
     git add .
     git commit -m "Update changelog"
