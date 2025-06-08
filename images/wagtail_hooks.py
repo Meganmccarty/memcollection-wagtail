@@ -1,14 +1,7 @@
-from wagtail import hooks
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 from wagtail.snippets.models import register_snippet
 
 from images.models import HabitatImage, InsectImage, PlantImage, SpecimenRecordImage
-
-
-# Hide the regular Images and Documents items from the main Wagtail menu
-@hooks.register('construct_main_menu')
-def hide_images_and_documents_menu_items(request, menu_items):
-    menu_items[:] = [item for item in menu_items if item.name != 'images' and item.name != 'documents']
 
 
 class SpecimenRecordImageSnippet(SnippetViewSet):
