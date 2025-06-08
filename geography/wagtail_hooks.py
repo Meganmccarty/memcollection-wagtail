@@ -94,6 +94,7 @@ class GeographyViewSetGroup(SnippetViewSetGroup):
     menu_icon = "site"
     menu_label = "Geography"
     menu_name = "geography"
+    menu_order = 90
 
 
 # Registers all of the snippets grouped under the GeographyViewSetGroup
