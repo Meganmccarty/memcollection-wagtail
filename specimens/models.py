@@ -7,6 +7,7 @@ from wagtail.fields import RichTextField
 from geography.models import CollectingTrip, Country, County, GPS, Locality, State
 from mixins.models import TimeStampMixin
 from taxonomy.models import Genus, Family, Order, Species, Subfamily, Subspecies, Tribe
+from utils.insect_attributes import Sex, Stage
 
 
 class Person(TimeStampMixin):
@@ -193,18 +194,6 @@ class SpecimenRecord(TimeStampMixin):
     )
 
     # Specimen details
-    class Sex(models.TextChoices):
-        MALE = "male", "male"
-        FEMALE = "female", "female"
-        UNKNOWN = "unknown", "unknown"
-
-    class Stage(models.TextChoices):
-        EGG = "egg", "egg"
-        LARVA = "larva", "larva"
-        NYMPH = "nymph", "nymph"
-        PUPA = "pupa", "pupa"
-        ADULT = "adult", "adult"
-
     class PreparationType(models.TextChoices):
         SPREAD = "spread", "spread"
         PINNED = "pinned", "pinned"
