@@ -1,8 +1,13 @@
 from django.db import models
+from wagtail.fields import RichTextField
 from wagtail.images.models import AbstractImage, AbstractRendition, Image
 
 from geography.models import CollectingTrip, Country, County, GPS, Locality, State
 from mixins.models import TimeStampMixin
+from pages.models import SpeciesPage
+from specimens.models import SpecimenRecord
+from taxonomy.models import Species
+from utils.insect_attributes import Sex, Stage
 
 
 class CustomImage(AbstractImage, TimeStampMixin):
@@ -14,8 +19,10 @@ class CustomImage(AbstractImage, TimeStampMixin):
     """
 
     alt_text = models.CharField(max_length=255, blank=True)
+    date = models.DateField(help_text="Enter the date the image was taken")
+    notes = RichTextField(blank=True)
 
-    admin_form_fields = Image.admin_form_fields + ("alt_text",)
+    admin_form_fields = Image.admin_form_fields + ("alt_text", "date", "notes")
 
 
 class CustomRendition(AbstractRendition, TimeStampMixin):
@@ -45,7 +52,6 @@ class BaseLiveImage(CustomImage):
         locality (Locality): The locality at which the image was taken.
         gps (GPS): The GPS coordinates at which the image was taken.
         collecting_trip (CollectingTrip): The collecting trip during which the image was taken.
-
     """
 
     country = models.ForeignKey(
@@ -96,3 +102,80 @@ class BaseLiveImage(CustomImage):
         blank=True,
         help_text="Select the collecting trip during which the image was taken",
     )
+
+
+class SpecimenRecordImage(CustomImage):
+    usi = models.ForeignKey(SpecimenRecord, on_delete=models.CASCADE,
+        related_name='specimen_images', help_text='Select the specimen in the image')
+
+    class Position(models.TextChoices):
+        DORSAL = "dorsal", "dorsal"
+        VENTRAL = "ventral", "ventral"
+        LATERAL = "lateral", "lateral"
+
+    position = models.CharField(max_length=10, choices=Position.choices, default=Position.DORSAL,
+        help_text='Select the view of the specimen in the image')
+
+
+class InsectImage(BaseLiveImage):
+    """An image model for a live insect image."""
+
+    species = models.ForeignKey(Species, on_delete=models.CASCADE, null=True, blank=True, related_name="insect_images", help_text="Select the species in the image, if it is identified")
+    species_page = models.ForeignKey(SpeciesPage, on_delete=models.CASCADE, null=True, blank=True, related_name="insect_images", help_text="Select the species page to which this image belongs, if the insect in the image is identified")
+    featured_family = models.BooleanField(default=False, help_text="Toggle to make this image represent the family to which the insect in the image belongs")
+    featured_species = models.BooleanField(default=False, help_text="Toggle to make this image represent the species to which the insect in the image belongs")
+
+    class Status(models.TextChoices):
+        WILD = "wild", "wild"
+        REARED = "reared", "reared"
+        BRED = "bred", "bred"
+
+    sex = models.CharField(
+        max_length=10,
+        choices=Sex.choices,
+        default=Sex.UNKNOWN,
+        help_text="Select the insect's sex",
+    )
+    stage = models.CharField(
+        max_length=10,
+        choices=Stage.choices,
+        default=Stage.ADULT,
+        help_text="Select the insect's stage",
+    )
+    status = models.CharField(max_length=10, choices=Status.choices, default=Status.WILD,
+        help_text="Select the status of the insect in the image")
+
+    @property
+    def identified(self):
+        if self.species and self.species_page:
+            return True
+        else:
+            return False
+    
+    @property
+    def family(self):
+        if self.featured_family == True:
+            return self.species.genus.tribe.subfamily.family.name
+        else:
+            return ""
+        
+    @property
+    def species_binomial(self):
+        if self.featured_species == True:
+            return self.species.binomial
+        else:
+            return ""
+
+
+class PlantImage(BaseLiveImage):
+    species_page = models.ManyToManyField(SpeciesPage, related_name='plant_images',
+        help_text='Select the species pages(s) to which this plant image should belong')
+    scientific_name = models.CharField(max_length=100, blank=True,
+        help_text='Enter the scientific name of the plant, if known')
+    common_name = models.CharField(max_length=100, blank=True,
+        help_text='Enter the common name of the plant, if known')
+
+
+class HabitatImage(BaseLiveImage):
+    species_page = models.ManyToManyField(SpeciesPage, related_name='habitat_images',
+        help_text='Select the species page(s) to which this habitat image should belong')
