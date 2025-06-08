@@ -11,5 +11,6 @@ since the docstrings in the viewsets, serializers, and Wagtail hooks are all mor
 
    geography/index
    mixins/index
+   pages/index
    specimens/index
    taxonomy/index
