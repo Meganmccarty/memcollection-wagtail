@@ -160,8 +160,8 @@ class Species(TimeStampMixin, TaxonomyBase):
         genus (Genus): The genus to which the species belongs.
         mona (str): The MONA (Hodges) number for the species (Lepidoptera only).
         p3 (str): The P3 (Pohl, Patterson, Pelham 2016) number for the species (Lepidoptera only).
-        ps (str): The Phylogenetic Sequence (Pohl and Nanz, 2023) number for the species
-        (Lepidoptera only).
+        ps (str): The Phylogenetic Sequence (Pohl and Nanz, 2023) number for the species \
+                  (Lepidoptera only).
         name (str): The scientific name of the taxon.
         common_name (str): The common name of the taxon, if it has one.
         authority (str): The authority of the taxon.
