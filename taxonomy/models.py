@@ -240,7 +240,7 @@ class Subspecies(TimeStampMixin, TaxonomyBase):
     species = models.ForeignKey(
         Species,
         on_delete=models.CASCADE,
-        related_name="+",
+        related_name="subspecies",
         help_text="Select the species to which this subspecies belongs",
     )
     mona = models.CharField(

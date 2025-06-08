@@ -1,13 +1,35 @@
 from django.db import models
-from django.template.defaultfilters import slugify
 from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.api import APIField
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 
-from taxonomy.models import Species
+from taxonomy.models import Species, Subspecies
+
 
 class SpeciesPage(Page):
-    """The model that represents an individual species page."""
+    """The model that represents an individual species page.
+
+    Included in this model is the wagtail_footnotes package, so that references can be added to the
+    page's content. The ultimate goal would be to structure them on the frontend in a manner similar
+    to Wikipedia's footnotes.
+
+    Attributes:
+        species (Species): The species that is associated with this page. This is a one to one
+                           relationship (a page can have only one species, and a species can have
+                           only one page).
+        taxonomy (RichTextField): A Wagtail field for adding taxonomy details about a species.
+        description (RichTextField): A Wagtail field for adding a description for a species.
+        distribution (RichTextField): A Wagtail field for adding information about a species'
+                                      distribution.
+        seasonality (RichTextField): A Wagtail field for describing a species' seasonality (or
+                                     flight periods, in the case of Lepidoptera).
+        habitat (RichTextField): A Wagtail field for detailing the habitat of a species
+        food (RichTextField): A Wagtail field for listing a species' food sources (both for larval
+                              and adult stages).
+        life_cycle (RichTextField): A Wagtail field for including details about a species' life
+                                    cycle.
+    """
 
     species = models.OneToOneField(
         Species,
@@ -36,3 +58,9 @@ class SpeciesPage(Page):
         FieldPanel("life_cycle"),
         InlinePanel("footnotes", label="Footnotes"),
     ]
+
+    @property
+    def subspecies(self):
+        """An array of subspecies that belong to this page's species object."""
+
+        return Subspecies.objects.select_related('species').filter(species__id=self.species.id)
