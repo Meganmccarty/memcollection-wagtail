@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from images.models import SpecimenRecordImage, CustomRendition
+from images.models import CustomImage, CustomRendition, HabitatImage, InsectImage, PlantImage, SpecimenRecordImage
 
 
 class RenditionsSerializer(serializers.ModelSerializer):
@@ -19,8 +19,8 @@ class RenditionsSerializer(serializers.ModelSerializer):
         )
 
 
-class SpecimenRecordImageSerializer(serializers.ModelSerializer):
-    """A serializer for the SpecimenRecordImage model."""
+class CustomImageSerializer(serializers.ModelSerializer):
+    """A serializer for the CustomImage model."""
 
     x_large = RenditionsSerializer()
     large = RenditionsSerializer()
@@ -30,34 +30,39 @@ class SpecimenRecordImageSerializer(serializers.ModelSerializer):
     thumbnail = RenditionsSerializer()
 
     class Meta:
+        model = CustomImage
+        fields = "__all__"
+
+
+class SpecimenRecordImageSerializer(CustomImageSerializer):
+    """A serializer for the SpecimenRecordImage model."""
+
+    class Meta:
         model = SpecimenRecordImage
-        fields = (
-            "id",
-            "date_created",
-            "date_modified",
-            "title",
-            "file",
-            "description",
-            "width",
-            "height",
-            "created_at",
-            "focal_point_x",
-            "focal_point_y",
-            "focal_point_width",
-            "focal_point_height",
-            "file_size",
-            "file_hash",
-            "alt_text",
-            "date",
-            "notes",
-            "position",
-            "collection",
-            "uploaded_by_user",
-            "usi",
-            "x_large",
-            "large",
-            "medium",
-            "small",
-            "x_small",
-            "thumbnail",
-        )
+        fields = "__all__"
+
+
+class InsectImageSerializer(CustomImageSerializer):
+    """A serializer for the InsectImage model."""
+
+    class Meta:
+        model = InsectImage
+        fields = "__all__"
+
+
+class PlantImageSerializer(CustomImageSerializer):
+    """A serializer for the PlantImage model."""
+
+    class Meta:
+        model = PlantImage
+        fields = "__all__"
+
+
+class HabitatImageSerializer(CustomImageSerializer):
+    """A serializer for the HabitatImage model."""
+
+    class Meta:
+        model = HabitatImage
+        fields = "__all__"
+
+
