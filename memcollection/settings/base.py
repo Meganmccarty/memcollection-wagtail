@@ -36,6 +36,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 INSTALLED_APPS = [
     "geography",
     "home",
+    "images",
     "pages",
     "search",
     "specimens",
@@ -166,6 +167,7 @@ STORAGES = {
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "memcollection"
+WAGTAILIMAGES_IMAGE_MODEL = "images.CustomImage"
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html

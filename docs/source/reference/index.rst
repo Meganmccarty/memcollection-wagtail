@@ -10,6 +10,7 @@ since the docstrings in the viewsets, serializers, and Wagtail hooks are all mor
    :caption: Contents:
 
    geography/index
+   images/index
    mixins/index
    pages/index
    specimens/index

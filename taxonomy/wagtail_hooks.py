@@ -83,6 +83,7 @@ class TaxonomyViewSetGroup(SnippetViewSetGroup):
     menu_icon = "form"
     menu_label = "Taxonomy"
     menu_name = "taxonomy"
+    menu_order = 70
 
 
 # Registers all of the snippets grouped under the TaxonomyViewSetGroup

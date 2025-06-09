@@ -15,6 +15,12 @@ from geography.views import (
     NestedStatesAPIViewSet,
     StatesAPIViewSet,
 )
+from images.views import (
+    HabitatImagesAPIViewSet,
+    InsectImagesAPIViewSet,
+    PlantImagesAPIViewSet,
+    SpecimenRecordImagesAPIViewSet,
+)
 from pages.views import SpeciesPagesAPIViewSet
 from specimens.views import PeopleAPIViewSet, SpecimenRecordAPIViewSet
 from taxonomy.views import (
@@ -56,6 +62,12 @@ api_router.register_endpoint("nested-localities", NestedLocalitiesAPIViewSet)
 api_router.register_endpoint("gps-coordinates", GPSAPIViewSet)
 api_router.register_endpoint("nested-gps-coordinates", NestedGPSAPIViewSet)
 api_router.register_endpoint("collecting-trips", CollectingTripsAPIViewSet)
+
+# Custom endpoints for the images app
+api_router.register_endpoint("specimen-record-images", SpecimenRecordImagesAPIViewSet)
+api_router.register_endpoint("insect-images", InsectImagesAPIViewSet)
+api_router.register_endpoint("plant-images", PlantImagesAPIViewSet)
+api_router.register_endpoint("habitat-images", HabitatImagesAPIViewSet)
 
 # Custom endpoint for pages app (SpeciesPage, specifically)
 api_router.register_endpoint("species-pages", SpeciesPagesAPIViewSet)
