@@ -1,6 +1,13 @@
 from rest_framework import serializers
 
-from images.models import CustomImage, CustomRendition, HabitatImage, InsectImage, PlantImage, SpecimenRecordImage
+from images.models import (
+    CustomImage,
+    CustomRendition,
+    HabitatImage,
+    InsectImage,
+    PlantImage,
+    SpecimenRecordImage,
+)
 
 
 class RenditionsSerializer(serializers.ModelSerializer):

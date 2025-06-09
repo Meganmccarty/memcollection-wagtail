@@ -1,12 +1,18 @@
 from wagtail.api.v2.views import BaseAPIViewSet
 
 from images.models import HabitatImage, InsectImage, PlantImage, SpecimenRecordImage
-from images.serializers import HabitatImageSerializer, InsectImageSerializer, PlantImageSerializer, SpecimenRecordImageSerializer
+from images.serializers import (
+    HabitatImageSerializer,
+    InsectImageSerializer,
+    PlantImageSerializer,
+    SpecimenRecordImageSerializer,
+)
 from utils.helpers import get_fields
 
 
 class SpecimenRecordImagesAPIViewSet(BaseAPIViewSet):
-    """A custom API view set for the SpecimenRecordImage model using the SpecimenRecordImageSerializer."""
+    """A custom API view set for the SpecimenRecordImage model using the \
+       SpecimenRecordImageSerializer."""
 
     base_serializer_class = SpecimenRecordImageSerializer
     model = SpecimenRecordImage

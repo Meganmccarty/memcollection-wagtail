@@ -15,7 +15,12 @@ from geography.views import (
     NestedStatesAPIViewSet,
     StatesAPIViewSet,
 )
-from images.views import HabitatImagesAPIViewSet, InsectImagesAPIViewSet, PlantImagesAPIViewSet, SpecimenRecordImagesAPIViewSet
+from images.views import (
+    HabitatImagesAPIViewSet,
+    InsectImagesAPIViewSet,
+    PlantImagesAPIViewSet,
+    SpecimenRecordImagesAPIViewSet,
+)
 from pages.views import SpeciesPagesAPIViewSet
 from specimens.views import PeopleAPIViewSet, SpecimenRecordAPIViewSet
 from taxonomy.views import (
