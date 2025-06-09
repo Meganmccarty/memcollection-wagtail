@@ -4,6 +4,8 @@ from images.models import CustomImage, CustomRendition, HabitatImage, InsectImag
 
 
 class RenditionsSerializer(serializers.ModelSerializer):
+    """A serializer for the CustomRendition model."""
+
     class Meta:
         model = CustomRendition
         fields = (
@@ -64,5 +66,3 @@ class HabitatImageSerializer(CustomImageSerializer):
     class Meta:
         model = HabitatImage
         fields = "__all__"
-
-
