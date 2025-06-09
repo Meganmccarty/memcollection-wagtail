@@ -18,7 +18,7 @@ django.setup()
 project = "MEMCollection-Wagtail"
 copyright = "2025, Megan McCarty"
 author = "Megan McCarty"
-release = "0.6.0"
+release = "0.7.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
