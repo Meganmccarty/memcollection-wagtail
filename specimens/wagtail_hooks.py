@@ -131,6 +131,7 @@ class SpecimensViewSetGroup(SnippetViewSetGroup):
     menu_icon = "butterfly"
     menu_label = "Specimens"
     menu_name = "specimens"
+    menu_order = 50
 
 
 # Registers all of the snippets grouped under the SpecimensViewSetGroup

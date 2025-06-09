@@ -21,7 +21,7 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Project version
-VERSION = "0.6.0"
+VERSION = "0.7.0"
 
 
 # Quick-start development settings - unsuitable for production
@@ -36,6 +36,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 INSTALLED_APPS = [
     "geography",
     "home",
+    "images",
     "pages",
     "search",
     "specimens",
@@ -166,6 +167,7 @@ STORAGES = {
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "memcollection"
+WAGTAILIMAGES_IMAGE_MODEL = "images.CustomImage"
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
