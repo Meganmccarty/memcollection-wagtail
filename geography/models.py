@@ -366,6 +366,12 @@ class GPS(TimeStampMixin):
         return "{}{}{}, {}".format(
             latitude, longitude, self.elevation_meters, self.locality
         )
+    
+    @property
+    def gps_coordinates(self):
+        """A string combining both latitude and longitude."""
+
+        return f"{self.latitude} {self.longitude}"
 
     @property
     def elevation_meters(self):
@@ -416,3 +422,11 @@ class CollectingTrip(TimeStampMixin):
         """Slugifies the name of a CollectingTrip object instance."""
 
         return slugify(self.name)
+
+    @property
+    def joined_states(self):
+        """A string representing all of the states collected in during a trip."""
+
+        return ", ".join(
+            [str(state) for state in self.states.all()]
+        )

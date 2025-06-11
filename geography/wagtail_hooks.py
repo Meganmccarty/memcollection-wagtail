@@ -1,4 +1,5 @@
-from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel, ObjectList, TabbedInterface
+from wagtail.admin.ui.tables import UpdatedAtColumn
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 from wagtail.snippets.models import register_snippet
 
@@ -12,6 +13,7 @@ class CountrySnippet(SnippetViewSet):
     menu_icon = "globe"
     menu_label = "Countries"
     menu_name = "countries"
+    list_display = ["name", "abbr", UpdatedAtColumn()]
 
 
 class StateSnippet(SnippetViewSet):
@@ -21,6 +23,7 @@ class StateSnippet(SnippetViewSet):
     menu_icon = "globe"
     menu_label = "States"
     menu_name = "states"
+    list_display = ["name", "abbr", "country", UpdatedAtColumn()]
 
 
 class CountySnippet(SnippetViewSet):
@@ -30,6 +33,8 @@ class CountySnippet(SnippetViewSet):
     menu_icon = "globe"
     menu_label = "Counties"
     menu_name = "counties"
+    list_display = ["full_name", "state", UpdatedAtColumn()]
+    list_filter = ["name", "state"]
 
 
 class LocalitySnippet(SnippetViewSet):
@@ -43,6 +48,8 @@ class LocalitySnippet(SnippetViewSet):
     menu_icon = "globe"
     menu_label = "Localities"
     menu_name = "localities"
+    list_display = ["name", "range", "town", "county", "state", "country", UpdatedAtColumn()]
+    list_filter = ["name", "town", "county"]
 
     panels = [
         FieldPanel("name"),
@@ -68,6 +75,8 @@ class GPSSnippet(SnippetViewSet):
     menu_icon = "globe"
     menu_label = "GPS Coordinates"
     menu_name = "gps_coordinates"
+    list_display = ["gps_coordinates", "locality", "elevation_meters", UpdatedAtColumn()]
+    list_filter = ["latitude", "longitude", "locality"]
 
 
 class CollectingTripSnippet(SnippetViewSet):
@@ -77,6 +86,8 @@ class CollectingTripSnippet(SnippetViewSet):
     menu_icon = "globe"
     menu_label = "Collecting Trips"
     menu_name = "collecting_trips"
+    list_display = ["name", "joined_states", "start_date", "end_date", UpdatedAtColumn()]
+    list_filter = ["name", "start_date", "end_date"]
 
 
 class GeographyViewSetGroup(SnippetViewSetGroup):
