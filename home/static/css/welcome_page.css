@@ -54,12 +54,15 @@ svg:not(:root) {
 }
 
 .logo {
-    width: 150px;
+    font-size: 1.75rem;
+    width: fit-content;
     margin-inline-end: 20px;
 }
 
 .logo a {
-    display: block;
+    align-items: flex-end;
+    display: flex;
+    text-decoration: none;
 }
 
 .figure-logo {
