@@ -5,7 +5,7 @@ flake8==7.3.0
 furo
 myst-parser>=4.0,<4.1
 psycopg2-binary==2.9.10
-python-dotenv==1.1.0
+python-dotenv==1.1.1
 sphinx>=8.2,<8.3
 wagtail>=7.0,<7.2
 wagtail-footnotes==0.13.0
