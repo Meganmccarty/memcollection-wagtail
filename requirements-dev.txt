@@ -1,6 +1,6 @@
 Django>=5.1,<5.2
 black==25.1.0
-coverage==7.9.1
+coverage==7.10.1
 flake8==7.3.0
 furo
 myst-parser>=4.0,<4.1
