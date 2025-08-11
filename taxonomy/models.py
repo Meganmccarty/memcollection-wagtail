@@ -28,7 +28,6 @@ class TaxonomyBase(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ["name"]
 
     def __str__(self):
         """Returns a string representation of a TaxonomyBase object instance.
@@ -53,7 +52,8 @@ class Order(TimeStampMixin, TaxonomyBase):
                                   from TimeStampMixin.
     """
 
-    pass
+    class Meta:
+        ordering = ["name"]
 
 
 class Family(TimeStampMixin, TaxonomyBase):
@@ -78,6 +78,7 @@ class Family(TimeStampMixin, TaxonomyBase):
     )
 
     class Meta:
+        ordering = ["name", "order"]
         verbose_name_plural = "Families"
 
 
@@ -103,6 +104,7 @@ class Subfamily(TimeStampMixin, TaxonomyBase):
     )
 
     class Meta:
+        ordering = ["name", "family"]
         verbose_name_plural = "Subfamilies"
 
 
@@ -127,6 +129,9 @@ class Tribe(TimeStampMixin, TaxonomyBase):
         help_text="Select the subfamily to which this tribe belongs",
     )
 
+    class Meta:
+        ordering = ["name", "subfamily"]
+
 
 class Genus(TimeStampMixin, TaxonomyBase):
     """A model that represents a Genus object.
@@ -150,6 +155,7 @@ class Genus(TimeStampMixin, TaxonomyBase):
     )
 
     class Meta:
+        ordering = ["name", "tribe"]
         verbose_name_plural = "Genera"
 
 
