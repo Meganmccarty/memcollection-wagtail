@@ -1,4 +1,5 @@
 from wagtail import hooks
+from wagtail.admin.ui.tables import UpdatedAtColumn
 from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 from wagtail.snippets.models import register_snippet
@@ -18,6 +19,17 @@ class PersonSnippet(SnippetViewSet):
     menu_icon = "group"
     menu_label = "People"
     menu_name = "people"
+    list_display = [
+        "full_name",
+        "first_name",
+        "middle_initial",
+        "last_name",
+        "suffix",
+        UpdatedAtColumn(),
+    ]
+    list_filter = ["first_name", "last_name"]
+    list_editable = ["first_name"]
+    list_per_page = 50
 
 
 class SpecimenRecordSnippet(SnippetViewSet):
@@ -27,6 +39,36 @@ class SpecimenRecordSnippet(SnippetViewSet):
     menu_icon = "butterfly"
     menu_label = "Specimen Records"
     menu_name = "specimen_records"
+    list_display = [
+        "__str__",
+        "order",
+        "family",
+        "subfamily",
+        "tribe",
+        "genus",
+        "species",
+        "subspecies",
+        UpdatedAtColumn(),
+    ]
+    list_filter = [
+        "subspecies",
+        "species",
+        "genus",
+        "tribe",
+        "subfamily",
+        "family",
+        "order",
+        "collecting_trip",
+        "country",
+        "state",
+        "county",
+        "locality",
+        "gps",
+        "day",
+        "month",
+        "year",
+    ]
+    list_per_page = 100
 
     panels = [
         FieldPanel("usi"),

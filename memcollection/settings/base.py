@@ -21,7 +21,7 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Project version
-VERSION = "0.7.2"
+VERSION = "0.8.0"
 
 
 # Quick-start development settings - unsuitable for production
@@ -167,6 +167,7 @@ STORAGES = {
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "memcollection"
+WAGTAILAPI_LIMIT_MAX = None
 WAGTAILIMAGES_IMAGE_MODEL = "images.CustomImage"
 
 # Search

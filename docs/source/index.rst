@@ -25,5 +25,6 @@ recreate this project from scratch...
    developing
    cicd
    deploying
+   backups
    changelog
    reference/index
