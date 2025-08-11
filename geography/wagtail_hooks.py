@@ -24,6 +24,7 @@ class StateSnippet(SnippetViewSet):
     menu_label = "States"
     menu_name = "states"
     list_display = ["name", "abbr", "country", UpdatedAtColumn()]
+    list_per_page = 50
 
 
 class CountySnippet(SnippetViewSet):
@@ -35,6 +36,7 @@ class CountySnippet(SnippetViewSet):
     menu_name = "counties"
     list_display = ["full_name", "state", UpdatedAtColumn()]
     list_filter = ["name", "state"]
+    list_per_page = 100
 
 
 class LocalitySnippet(SnippetViewSet):
@@ -50,6 +52,7 @@ class LocalitySnippet(SnippetViewSet):
     menu_name = "localities"
     list_display = ["name", "range", "town", "county", "state", "country", UpdatedAtColumn()]
     list_filter = ["name", "town", "county"]
+    list_per_page = 100
 
     panels = [
         FieldPanel("name"),
@@ -75,8 +78,9 @@ class GPSSnippet(SnippetViewSet):
     menu_icon = "globe"
     menu_label = "GPS Coordinates"
     menu_name = "gps_coordinates"
-    list_display = ["gps_coordinates", "locality", "elevation_meters", UpdatedAtColumn()]
+    list_display = ["gps_coordinates", "locality", "locality__county", "elevation_meters", UpdatedAtColumn()]
     list_filter = ["latitude", "longitude", "locality"]
+    list_per_page = 100
 
 
 class CollectingTripSnippet(SnippetViewSet):

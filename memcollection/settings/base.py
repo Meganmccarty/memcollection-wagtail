@@ -167,6 +167,7 @@ STORAGES = {
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "memcollection"
+WAGTAILAPI_LIMIT_MAX = None
 WAGTAILIMAGES_IMAGE_MODEL = "images.CustomImage"
 
 # Search

@@ -1,3 +1,4 @@
+from wagtail.admin.ui.tables import UpdatedAtColumn
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 from wagtail.snippets.models import register_snippet
 
@@ -11,6 +12,9 @@ class OrderSnippet(SnippetViewSet):
     menu_icon = "list-ul"
     menu_label = "Orders"
     menu_name = "orders"
+    list_display = ["name", "common_name", "authority", UpdatedAtColumn()]
+    list_filter = ["name", "common_name", "authority"]
+    list_per_page = 50
 
 
 class FamilySnippet(SnippetViewSet):
@@ -20,6 +24,9 @@ class FamilySnippet(SnippetViewSet):
     menu_icon = "list-ul"
     menu_label = "Families"
     menu_name = "families"
+    list_display = ["name", "common_name", "authority", "order", UpdatedAtColumn()]
+    list_filter = ["name", "common_name", "authority", "order"]
+    list_per_page = 100
 
 
 class SubfamilySnippet(SnippetViewSet):
@@ -29,6 +36,9 @@ class SubfamilySnippet(SnippetViewSet):
     menu_icon = "list-ul"
     menu_label = "Subfamilies"
     menu_name = "subfamilies"
+    list_display = ["name", "common_name", "authority", "family", UpdatedAtColumn()]
+    list_filter = ["name", "common_name", "authority", "family"]
+    list_per_page = 100
 
 
 class TribeSnippet(SnippetViewSet):
@@ -38,6 +48,9 @@ class TribeSnippet(SnippetViewSet):
     menu_icon = "list-ul"
     menu_label = "Tribes"
     menu_name = "tribes"
+    list_display = ["name", "common_name", "authority", "subfamily", UpdatedAtColumn()]
+    list_filter = ["name", "common_name", "authority", "subfamily"]
+    list_per_page = 100
 
 
 class GenusSnippet(SnippetViewSet):
@@ -47,6 +60,9 @@ class GenusSnippet(SnippetViewSet):
     menu_icon = "list-ul"
     menu_label = "Genera"
     menu_name = "genera"
+    list_display = ["name", "common_name", "authority", "tribe", UpdatedAtColumn()]
+    list_filter = ["name", "common_name", "authority", "tribe"]
+    list_per_page = 100
 
 
 class SpeciesSnippet(SnippetViewSet):
@@ -56,6 +72,9 @@ class SpeciesSnippet(SnippetViewSet):
     menu_icon = "list-ul"
     menu_label = "Species"
     menu_name = "species"
+    list_display = ["binomial", "genus", "name", "common_name", "authority", "mona", "ps", UpdatedAtColumn()]
+    list_filter = ["genus", "name", "common_name", "authority", "mona", "ps"]
+    list_per_page = 100
 
 
 class SubspeciesSnippet(SnippetViewSet):
@@ -65,6 +84,9 @@ class SubspeciesSnippet(SnippetViewSet):
     menu_icon = "list-ul"
     menu_label = "Subspecies"
     menu_name = "subspecies"
+    list_display = ["trinomial", "species__genus", "species__name", "name", "common_name", "authority", "mona", "ps", UpdatedAtColumn()]
+    list_filter = ["species", "name", "common_name", "authority", "mona", "ps"]
+    list_per_page = 100
 
 
 class TaxonomyViewSetGroup(SnippetViewSetGroup):
