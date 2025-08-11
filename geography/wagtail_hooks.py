@@ -1,4 +1,4 @@
-from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel, ObjectList, TabbedInterface
+from wagtail.admin.panels import FieldPanel, HelpPanel, MultiFieldPanel
 from wagtail.admin.ui.tables import UpdatedAtColumn
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 from wagtail.snippets.models import register_snippet
@@ -50,7 +50,15 @@ class LocalitySnippet(SnippetViewSet):
     menu_icon = "globe"
     menu_label = "Localities"
     menu_name = "localities"
-    list_display = ["name", "range", "town", "county", "state", "country", UpdatedAtColumn()]
+    list_display = [
+        "name",
+        "range",
+        "town",
+        "county",
+        "state",
+        "country",
+        UpdatedAtColumn(),
+    ]
     list_filter = ["name", "town", "county"]
     list_per_page = 100
 
@@ -78,7 +86,13 @@ class GPSSnippet(SnippetViewSet):
     menu_icon = "globe"
     menu_label = "GPS Coordinates"
     menu_name = "gps_coordinates"
-    list_display = ["gps_coordinates", "locality", "locality__county", "elevation_meters", UpdatedAtColumn()]
+    list_display = [
+        "gps_coordinates",
+        "locality",
+        "locality__county",
+        "elevation_meters",
+        UpdatedAtColumn(),
+    ]
     list_filter = ["latitude", "longitude", "locality"]
     list_per_page = 100
 
@@ -90,7 +104,13 @@ class CollectingTripSnippet(SnippetViewSet):
     menu_icon = "globe"
     menu_label = "Collecting Trips"
     menu_name = "collecting_trips"
-    list_display = ["name", "joined_states", "start_date", "end_date", UpdatedAtColumn()]
+    list_display = [
+        "name",
+        "joined_states",
+        "start_date",
+        "end_date",
+        UpdatedAtColumn(),
+    ]
     list_filter = ["name", "start_date", "end_date"]
 
 

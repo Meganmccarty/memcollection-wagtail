@@ -72,7 +72,16 @@ class SpeciesSnippet(SnippetViewSet):
     menu_icon = "list-ul"
     menu_label = "Species"
     menu_name = "species"
-    list_display = ["binomial", "genus", "name", "common_name", "authority", "mona", "ps", UpdatedAtColumn()]
+    list_display = [
+        "binomial",
+        "genus",
+        "name",
+        "common_name",
+        "authority",
+        "mona",
+        "ps",
+        UpdatedAtColumn(),
+    ]
     list_filter = ["genus", "name", "common_name", "authority", "mona", "ps"]
     list_per_page = 100
 
@@ -84,7 +93,17 @@ class SubspeciesSnippet(SnippetViewSet):
     menu_icon = "list-ul"
     menu_label = "Subspecies"
     menu_name = "subspecies"
-    list_display = ["trinomial", "species__genus", "species__name", "name", "common_name", "authority", "mona", "ps", UpdatedAtColumn()]
+    list_display = [
+        "trinomial",
+        "species__genus",
+        "species__name",
+        "name",
+        "common_name",
+        "authority",
+        "mona",
+        "ps",
+        UpdatedAtColumn(),
+    ]
     list_filter = ["species", "name", "common_name", "authority", "mona", "ps"]
     list_per_page = 100
 
