@@ -54,11 +54,11 @@ load-fixtures: ## Loads all fixture data into the database
 		species.json subspecies.json
 
 local-backup: ## Creates a backup of the local database (but only of my models)
-	docker compose run --rm web python manage.py dumpdata geography pages specimens taxonomy > \
+	docker compose run --rm web python manage.py dumpdata geography specimens taxonomy > \
 	"$$(date +'backup_local_memcollection_%F-%T.json')" --indent=4 --natural-foreign
 
 prod-backup: ## Creates a backup of the prod database (but only of my models)
-	python manage.py dumpdata geography pages specimens taxonomy > \
+	python manage.py dumpdata geography specimens taxonomy > \
 	"$$(date +'backup_prod_memcollection_%F-%T.json')" --indent=4 --natural-foreign
 
 local-restore: ## Loads a backup's data into the local database (must set 'filename=<filename>.json')

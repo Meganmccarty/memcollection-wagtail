@@ -77,7 +77,7 @@ in the project's root directory, then simply run:
 
 .. code::
 
-    make local-restore
+    make local-restore filename=backup_<env>_memcollection_<time-stamp>.json
 
 Boom! Data should be loaded in.
 
@@ -100,6 +100,6 @@ Now that the file is on fly, exit out of that terminal, and then run:
 .. code::
 
     fly ssh console
-    make prod-restore
+    make prod-restore filename=backup_<env>_memcollection_<time-stamp>.json
 
 Boom! Data from the backup file should now be in the prod environment.
