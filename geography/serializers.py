@@ -138,8 +138,8 @@ class NestedLocalitySerializer(LocalitySerializer):
     county fields using their respective serializers."""
 
     country = CountrySerializer()
-    state = StateSerializer()
-    county = CountySerializer()
+    state = NestedStateSerializer()
+    county = NestedCountySerializer()
 
 
 class NestedGPSSerializer(GPSSerializer):

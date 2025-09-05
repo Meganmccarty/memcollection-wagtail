@@ -123,9 +123,9 @@ class SpecimenRecord(TimeStampMixin):
         collector (Person): The collector(s) who collected the specimen.
         method (str): The method used to collect the specimen.
         weather (str): A brief description of the weather conditions during the specimen's capture.
-        temperature (str): The outdoor temperature during the specimen's capture. It is a string \
-                           rather than a float so that I have control on whether or not a decimal \
-                           point on the field is serialized.
+        temperature (str): The outdoor temperature (in Fahrenheit) during the specimen's capture. \
+                           It is a string rather than a float so that I have control on whether or \
+                           not a decimal point on the field is serialized.
         time_of_day (str): The time of day (or night) the specimen was captured.
         habitat (str): The habitat details of where the specimen was captured.
         notes (str): Any additional notes about the specimen.
