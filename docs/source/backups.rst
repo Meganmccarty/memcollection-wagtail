@@ -21,8 +21,8 @@ docs as well as in the Makefile, as they may come in handy to quickly dump data 
 JSON format. (Though I'm only retaining the local commands, as the old prod commands were specific
 to my unmanaged postgres database on Fly.io.)
 
-Using ``pg_dump`` and ``pg_restore``
-------------------------------------
+Creating Manual Backups
+-----------------------
 
 Backing up and restoring data is super easy thanks to ``pg_dump`` and ``pg_restore``. The process is
 similar between local and prod databases, though prod takes a few more steps. These steps assume
@@ -132,6 +132,35 @@ be switched on).
 
 When that's done, run ``make fly-secrets``. You may also have to log into the Fly.io dashboard,
 navigate to the Secrets page, and click "Deploy Secrets" for the changes to take effect.
+
+Automatic Backups
+-----------------
+
+I've also set up a scheduled cron job in GitHub Actions that backs up the prod database in Neon
+every night (using ``pg_dump``) and stores the file in a Backblaze B2 bucket (you can view the
+`GitHub Action file over in GitHub <https://github.com/Meganmccarty/memcollection-wagtail/blob/main/.github/workflows/nightly-db-backup.yaml>`_).
+This assumes you've created a private, encrypted bucket (with object lock disabled) in the B2
+console; created a new app key and given it access only to the new bucket; and saved the app key
+credentials in both GitHub Secrets and locally within an aws cli profile. You'll also want to make a
+note of the bucket's region and endpoint url (again, for both GitHub Secrets and the aws cli).
+
+In the event that you need to use one of these backups, you first have to download it from
+Backblaze. First, log into Backblaze and navigate to the "Browse Files" link under "B2 Cloud
+Storage" from the left-side navigation. Next, drill down into the database backups bucket, and find
+the file you wish to use for the restore. Copy the file name.
+
+Next, in your local terminal, you need to use the aws cli to download the file (Backblaze won't let
+you download it otherwise, as it's encrypted). Run the following command to get the file from
+Backblaze, filling in the necessary details you saved from earlier:
+
+.. code::
+
+    aws s3 cp s3://<bucket-name>/<path>/<to>/<file>/<paste-file-name-here> ./<name-the-copy-whatever-you-want-here> --endpoint-url <bucket-endpoint-url> --region <region-bucket-is-in> --profile <name-of-custom-profile>
+
+This should make a copy of the file from Backblaze onto your local machine.
+
+Then, to restore it into Neon, follow the steps above for restoring a prod backup, and you should
+be set.
 
 Old Way: Using ``dumpdata`` and ``loaddata``
 --------------------------------------------

@@ -1,0 +1,49 @@
+name: Nightly Database Backup
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install PostgreSQL client and AWS CLI
+        run: |
+          sudo apt-get update
+          yes '' | sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client-17 unzip curl
+
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install --update
+
+      - name: Create pg_dump backup
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL_BKUP }}
+        run: |
+          export PATH=/usr/lib/postgresql/17/bin:$PATH
+          echo "Using pg_dump version:"
+          pg_dump --version
+
+          TIMESTAMP=$(date +"%Y%m%d%H%M%S")
+          pg_dump -d "$DATABASE_URL" \
+            --format=custom \
+            --no-owner \
+            --no-acl \
+            > nightly-prod-backup-$TIMESTAMP.backup
+          echo "Backup size:"
+          ls -lh nightly-prod-backup-*.backup
+
+      - name: Upload backup to Backblaze B2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_S3_DB_BACKUPS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_DB_BACKUPS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_S3_REGION_NAME }}
+        run: |
+          aws s3 cp nightly-prod-backup-*.backup \
+            s3://${{ secrets.AWS_DB_BACKUPS_BUCKET_NAME }}/db/prod/ \
+            --endpoint-url ${{ secrets.AWS_S3_ENDPOINT_URL }}
