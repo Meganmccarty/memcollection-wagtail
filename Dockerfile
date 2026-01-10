@@ -1,5 +1,5 @@
 # Set this to either dev or prod to build the correct stage
-ARG ENVIRONMENT
+ARG ENVIRONMENT=dev
 
 # Use an official Python runtime based on Debian 12 "bookworm" as a parent image.
 FROM python:3.12-slim-bookworm AS base
@@ -25,6 +25,7 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
     libjpeg62-turbo-dev \
     zlib1g-dev \
     libwebp-dev \
+    postgresql-client \
  && rm -rf /var/lib/apt/lists/*
 
 # Install the application server.
