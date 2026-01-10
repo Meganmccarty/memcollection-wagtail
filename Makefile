@@ -1,3 +1,6 @@
+include .env
+export
+
 .PHONY: help
 
 help:
@@ -53,19 +56,42 @@ load-fixtures: ## Loads all fixture data into the database
 		gps_coordinates.json collecting_trips.json orders.json families.json subfamilies.json tribes.json genera.json \
 		species.json subspecies.json
 
-local-backup: ## Creates a backup of the local database (but only of my models)
+DB_NAME := ${DATABASE_NAME}
+DB_USER := ${DATABASE_USER}
+PGPASSWORD := ${DATABASE_PASSWORD}
+
+full-local-backup: ## Creates a full/complete local Postgres backup
+	docker compose exec -T db \
+	pg_dump --format=custom -v --no-owner --no-acl \
+	-U $(DB_USER) -d $(DB_NAME) \
+	> db_backups/$$(date +'%Y%m%d%H%M%S_local.backup')
+
+verify-backup: ## Verifies that the backup was successful (must set 'filename=path/to/file.backup')
+	docker compose exec -T db \
+	pg_restore --list $(filename)
+
+full-local-restore: ## Restores a full/complete local Postgres backup (must set 'filename=path/to/file.backup')
+	docker compose exec -T \
+	-e PGPASSWORD=$(PGPASSWORD) \
+	db \
+	pg_restore -v --no-owner --no-acl --clean \
+	-h db -U $(DB_USER) -d $(DB_NAME) \
+	$(filename)
+
+full-prod-backup: ## Creates a full/complete Postgres backup from the production database (must set 'dbname="prod-db-name"')
+	pg_dump --format=custom -v --no-owner --no-acl \
+	-d "$(dbname)" \
+	-f db_backups/$$(date +'%Y%m%d%H%M%S_prod.backup')
+
+full-prod-restore: ## Restores a full/complete Postgres backup to the production database (must set 'dbname="prod-dbname"' and 'filename=path/to/file.back')
+	pg_restore -v -d "$(dbname)" $(filename)
+
+local-backup: ## Creates a JSON backup of the local database (but only of my models)
 	docker compose run --rm web python manage.py dumpdata geography specimens taxonomy > \
 	"$$(date +'backup_local_memcollection_%F-%T.json')" --indent=4 --natural-foreign
 
-prod-backup: ## Creates a backup of the prod database (but only of my models)
-	python manage.py dumpdata geography specimens taxonomy > \
-	"$$(date +'backup_prod_memcollection_%F-%T.json')" --indent=4 --natural-foreign
-
 local-restore: ## Loads a backup's data into the local database (must set 'filename=<filename>.json')
 	docker compose run --rm web python manage.py loaddata $(filename)
-
-prod-restore: ## Loads a backup's data into the prod database (must set 'filename=<filename>.json')
-	python manage.py loaddata $(filename)
 
 # Linting, formatting, and testing commands
 lint: ## Lints Python code using flake8
