@@ -129,6 +129,19 @@ Response:
                     "genus": 2
                 },
                 "subspecies": null,
+                "taxon": {
+                    "id": 3,
+                    "name": "polyxenes",
+                    "binomial": "Papilio polyxenes",
+                    "common_name": "Black Swallowtail",
+                    "authority": "Fabricius, 1775",
+                    "mona": "4159",
+                    "p3": null,
+                    "ps": "77a0366",
+                    "date_created": "2024-11-17T18:51:41.837000Z",
+                    "date_modified": "2025-07-20T05:06:02.461000Z",
+                    "genus": 2
+                },
                 "determiner": {
                     "id": 1,
                     "first_name": "Megan",
