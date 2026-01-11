@@ -4,7 +4,25 @@ export
 .PHONY: help
 
 help:
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | sort | \
+	awk 'BEGIN {FS = ":.*?## "; OFS = ""} \
+	{comment = $$2; \
+	printf "\033[36m%-30s\033[0m", $$1; \
+	line = ""; \
+	while (length(comment) > 60) { \
+		split(comment, parts, " "); \
+		line = ""; \
+		for (i = 1; i <= length(parts); i++) { \
+			if (length(line " " parts[i]) > 60) { \
+				printf " %s\n%-30s", line, ""; \
+				line = parts[i]; \
+			} else { \
+				line = (line == "" ? parts[i] : line " " parts[i]); \
+			} \
+		} \
+		comment = line; \
+	} \
+	printf " %s\n", comment; }'
 
 # Docker commands
 build: ## Builds Docker containers for the Wagtail app and Postgres database
@@ -45,6 +63,10 @@ createsuperuser: ## Creates a super user for the Wagtail app
 create-app: ## Creates new Django app (must set 'name=YOUR-APP-NAME')
 	docker compose run --rm web python manage.py startapp $(name)
 
+create-species-pages: ## Creates species pages for each species in the database (only creates pages for species that are missing them)
+	docker compose run --rm web python manage.py create_species_pages
+
+# Data fixture commands
 dumpdata: ## Creates a JSON fixture from data in the database (must set 'model=app.Model' and 'output=app/fixtures/models.json')
 	docker compose run --rm web python manage.py dumpdata $(model) --output=$(output) --indent=4 --natural-foreign
 
@@ -56,6 +78,7 @@ load-fixtures: ## Loads all fixture data into the database
 		gps_coordinates.json collecting_trips.json orders.json families.json subfamilies.json tribes.json genera.json \
 		species.json subspecies.json
 
+# Database backup and restore commands
 DB_NAME := ${DATABASE_NAME}
 DB_USER := ${DATABASE_USER}
 PGPASSWORD := ${DATABASE_PASSWORD}
