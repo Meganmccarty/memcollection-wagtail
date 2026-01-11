@@ -71,6 +71,31 @@ class SpeciesPage(Page):
     ]
 
     @property
+    def order(self):
+        """The order to which this page's species belongs."""
+        return self.species.genus.tribe.subfamily.family.order
+
+    @property
+    def family(self):
+        """The family to which this page's species belongs."""
+        return self.species.genus.tribe.subfamily.family
+
+    @property
+    def subfamily(self):
+        """The subfamily to which this page's species belongs."""
+        return self.species.genus.tribe.subfamily
+
+    @property
+    def tribe(self):
+        """The tribe to which this page's species belongs."""
+        return self.species.genus.tribe
+
+    @property
+    def genus(self):
+        """The genus to which this page's species belongs."""
+        return self.species.genus
+
+    @property
     def subspecies(self):
         """An array of subspecies that belong to this page's species object."""
 

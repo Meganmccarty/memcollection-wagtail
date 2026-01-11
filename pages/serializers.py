@@ -2,7 +2,15 @@ from rest_framework import serializers
 from wagtail_footnotes.models import Footnote
 
 from pages.models import SpeciesPage
-from taxonomy.serializers import NestedSpeciesSerializer, SubspeciesSerializer
+from taxonomy.serializers import (
+    FamilySerializer,
+    GenusSerializer,
+    OrderSerializer,
+    SpeciesSerializer,
+    SubfamilySerializer,
+    SubspeciesSerializer,
+    TribeSerializer,
+)
 
 
 class FootnoteSerializer(serializers.ModelSerializer):
@@ -16,7 +24,12 @@ class FootnoteSerializer(serializers.ModelSerializer):
 class SpeciesPageSerializer(serializers.ModelSerializer):
     """A serializer for the SpeciesPage model."""
 
-    species = NestedSpeciesSerializer()
+    order = OrderSerializer()
+    family = FamilySerializer()
+    subfamily = SubfamilySerializer()
+    tribe = TribeSerializer()
+    genus = GenusSerializer()
+    species = SpeciesSerializer()
     subspecies = SubspeciesSerializer(many=True)
     footnotes = FootnoteSerializer(many=True)
 
@@ -24,10 +37,15 @@ class SpeciesPageSerializer(serializers.ModelSerializer):
         model = SpeciesPage
         fields = (
             "id",
-            "species",
-            "subspecies",
             "title",
             "slug",
+            "order",
+            "family",
+            "subfamily",
+            "tribe",
+            "genus",
+            "species",
+            "subspecies",
             "taxonomy",
             "description",
             "distribution",

@@ -54,6 +54,10 @@ class SpecimenRecordImageSerializer(CustomImageSerializer):
 class InsectImageSerializer(CustomImageSerializer):
     """A serializer for the InsectImage model."""
 
+    identified = serializers.ReadOnlyField()
+    family = serializers.ReadOnlyField()
+    species_binomial = serializers.ReadOnlyField()
+
     class Meta:
         model = InsectImage
         fields = "__all__"
