@@ -16,9 +16,9 @@ os.environ["DJANGO_SETTINGS_MODULE"] = "memcollection.settings.dev"
 django.setup()
 
 project = "MEMCollection-Wagtail"
-copyright = "2025, Megan McCarty"
+copyright = "2026, Megan McCarty"
 author = "Megan McCarty"
-release = "0.8.1"
+release = "0.9.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

@@ -11,17 +11,20 @@ services:
       - "8000:8000"
     environment:
       DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}
+      ENVIRONMENT: ${ENVIRONMENT}
       SECRET_KEY: ${SECRET_KEY}
     depends_on:
       - db
 
   db:
-    image: postgres:15
+    image: postgres:17
     volumes:
+      - ./db_backups:/db_backups
       - ./postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
+      ENVIRONMENT: ${ENVIRONMENT}
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
