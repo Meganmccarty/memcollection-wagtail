@@ -7,5 +7,5 @@ furo
 myst-parser>=4.0,<4.1
 psycopg2-binary==2.9.11
 python-dotenv==1.2.1
-sphinx>=8.2,<8.3
+sphinx>=8.2,<9.2
 wagtail>=7.0,<7.2
