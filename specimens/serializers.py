@@ -67,6 +67,26 @@ class SpecimenRecordSerializer(serializers.ModelSerializer):
 
     collector = PersonSerializer(many=True)
 
+    taxon = serializers.SerializerMethodField()
+
+    def get_taxon(self, obj):
+        """Determine the most specific taxon field."""
+        if obj.subspecies:
+            return SubspeciesSerializer(obj.subspecies).data
+        if obj.species:
+            return SpeciesSerializer(obj.species).data
+        if obj.genus:
+            return GenusSerializer(obj.genus).data
+        if obj.tribe:
+            return TribeSerializer(obj.tribe).data
+        if obj.subfamily:
+            return SubfamilySerializer(obj.subfamily).data
+        if obj.family:
+            return FamilySerializer(obj.family).data
+        if obj.order:
+            return OrderSerializer(obj.order).data
+        return None
+
     class Meta:
         model = SpecimenRecord
         fields = (
@@ -79,6 +99,7 @@ class SpecimenRecordSerializer(serializers.ModelSerializer):
             "genus",
             "species",
             "subspecies",
+            "taxon",
             "determiner",
             "determined_year",
             "sex",

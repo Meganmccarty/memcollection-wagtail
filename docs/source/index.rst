@@ -1,10 +1,10 @@
-.. MEMCollection-Wagtail documentation master file, created by
+.. MEM Collection API documentation master file, created by
    sphinx-quickstart on Fri May 23 22:49:12 2025.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-MEMCollection-Wagtail
-=====================
+MEM Collection API
+==================
 
 MEM Collection is a (perpetual work-in-progress) project where I manage my personal entomology
 collection and my personal photo collection of live specimens. This repo represents the backend API

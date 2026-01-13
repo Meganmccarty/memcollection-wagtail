@@ -1,5 +1,5 @@
 from django.db import models
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 
@@ -67,8 +67,35 @@ class SpeciesPage(Page):
         FieldPanel("habitat"),
         FieldPanel("food"),
         FieldPanel("life_cycle"),
-        InlinePanel("footnotes", label="Footnotes"),
+        # Commenting wagtail-footnotes out for now, since I'm not currently using it,
+        # and it's no longer compatible with the latest versions of Django and Wagtail
+        # InlinePanel("footnotes", label="Footnotes"),
     ]
+
+    @property
+    def order(self):
+        """The order to which this page's species belongs."""
+        return self.species.genus.tribe.subfamily.family.order
+
+    @property
+    def family(self):
+        """The family to which this page's species belongs."""
+        return self.species.genus.tribe.subfamily.family
+
+    @property
+    def subfamily(self):
+        """The subfamily to which this page's species belongs."""
+        return self.species.genus.tribe.subfamily
+
+    @property
+    def tribe(self):
+        """The tribe to which this page's species belongs."""
+        return self.species.genus.tribe
+
+    @property
+    def genus(self):
+        """The genus to which this page's species belongs."""
+        return self.species.genus
 
     @property
     def subspecies(self):

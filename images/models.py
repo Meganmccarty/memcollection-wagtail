@@ -264,19 +264,13 @@ class InsectImage(BaseLiveImage):
     def family(self):
         """The name of the family to which the insect in the image belongs."""
 
-        if self.featured_family:
-            return self.species.genus.tribe.subfamily.family.name
-        else:
-            return ""
+        return self.species.genus.tribe.subfamily.family.name
 
     @property
     def species_binomial(self):
         """The binomial of the species to which the insect in the image belongs."""
 
-        if self.featured_species:
-            return self.species.binomial
-        else:
-            return ""
+        return self.species.binomial
 
 
 class PlantImage(BaseLiveImage):
