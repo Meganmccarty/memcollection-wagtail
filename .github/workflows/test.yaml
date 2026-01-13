@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       db:
-        image: postgres:15
+        image: postgres:17
         env:
           POSTGRES_DB: test
           POSTGRES_USER: test
