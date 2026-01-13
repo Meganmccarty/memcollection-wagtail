@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 os.environ["DJANGO_SETTINGS_MODULE"] = "memcollection.settings.dev"
 django.setup()
 
-project = "MEMCollection-Wagtail"
+project = "MEM Collection API"
 copyright = "2026, Megan McCarty"
 author = "Megan McCarty"
 release = "0.9.0"
@@ -47,7 +47,7 @@ html_theme_options = {
     "footer_icons": [
         {
             "name": "GitHub",
-            "url": "https://github.com/Meganmccarty/memcollection-wagtail",
+            "url": "https://github.com/Meganmccarty/memcollection-api",
             "html": """
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 \
@@ -64,7 +64,7 @@ html_theme_options = {
             "class": "",
         },
     ],
-    "source_repository": "https://github.com/Meganmccarty/memcollection-wagtail/",
+    "source_repository": "https://github.com/Meganmccarty/memcollection-api/",
     "source_branch": "main",
     "source_directory": "docs/",
 }

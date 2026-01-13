@@ -9,7 +9,7 @@ First, clone this repo from GitHub:
 
 .. code::
 
-    git clone git@github.com:Meganmccarty/memcollection-wagtail.git
+    git clone git@github.com:Meganmccarty/memcollection-api.git
 
 Environment Variables
 ---------------------
@@ -33,45 +33,25 @@ Docker
 ------
 
 This project uses `Docker Compose <https://docs.docker.com/compose/>`_ to manage containers (one for
-the Wagtail web app, and another for the Postgres database). 
+the Wagtail web app, and another for the Postgres database). You'll need to install
+`Docker Desktop <https://www.docker.com/products/docker-desktop/>`_ in order to start the
+containers.
 
-If you're using a Macbook with an M1/M2/M3 chip, you'll need to use a different set of commands.
-Because these commands are a bit unwieldy, I created a Makefile to make typing the commands out
-easier. Feel free to look in the Makefile to see what these commands are actually doing
-under-the-hood. You can also run ``make help`` for a list of all the available Makefile commands (and
-what they do!).
+I have a Makefile set up for running all of the various commands referenced through these docs. If
+you want a complete list of all the available commands and what they do, just run ``make help``.
 
 Building and Spinning Up Containers
------------------------------------
+***********************************
 
-To build an image (non-M chip), run
+To get the containers up and running, execute the following two commands in your terminal:
 
 .. code::
 
     make build
-
-or, if on an M chip, run
-
-.. code::
-
-    make mac-build
-
-Once the image finishes building, run
-
-.. code::
-
     make up
 
-or
-
-.. code::
-
-    make mac-up
-
-to spin up the containers.
-
 After the containers are up, you should find that two services have been created: one for the
-Wagtail app, and another for the Postgres database. You could be able to access the app at
+Wagtail app, and another for the Postgres database. You should be able to access the app at
 http://localhost:8000/.
 
 You may need to run migrations before anything else. To do so, run the following in a separate
@@ -93,35 +73,59 @@ defaults (user = 'wagtail', email = '') and input a password. Afterwards, use yo
 user account to log into the Wagtail admin at http://localhost:8000/admin.
 
 Stopping and Tearing Down Containers
-------------------------------------
+************************************
 
 To stop the containers, press ``Ctrl+C`` in the terminal where your containers are running.
 
-If you want to tear down the containers, simply run the following:
+If you want to tear down the containers, simply run ``make down``. This command will NOT wipe out
+the contents of your database, as they are stored on a volume (``/postgres-data``) within the
+project directory.
+
+If you find you want to wipe out everything, simply run ``make prune`` (be careful with this
+command!). This will prune your system, containers, images, and volumes.
+
+If, while developing, you find you need to rebuild an image without caching, there's a command for
+that too: ``make build-no-cache``.
+
+Note about Macbooks with M Chips
+********************************
+
+When I first started this project on a newer Macbook with an M chip, I ran into some issues with
+building and running a postgres Docker container, so I created a separate set of Mac-specific
+Makefile commands and a separate Docker Compose file to get a postgres container up and running.
+There are 3 Mac-specific commands:
 
 .. code::
 
-    make down
-
-This command works for both non-M chip and M chip laptops. It will NOT wipe out the contents of your
-database, as they are stored on a volume (``/postgres-data``) within the project directory.
-
-If you find you want to wipe out everything, simply run:
-
-.. code::
-
-    make prune
-
-This will prune your system, containers, images, and volumes. Be careful with this command!
-
-If, while developing, you find you need to rebuild an image without caching, there's a command for that:
-
-.. code::
-
-    make build-no-cache
-
-or
-
-.. code::
-
+    make mac-build
     make mac-build-no-cache
+    make mac-up
+
+Somehow, the non-M chip commands started magically working on my M3 chip laptop (it may have been
+when I upgraded the postgres image from 15 to 17 in the regular ``docker-compose.yaml`` file);
+despite this, I'm keeping the separate set of Makefile commands and the separate Docker Compose
+file in case they are needed on a different M chip Macbook.
+
+Seeding the Database with Sample Data
+--------------------------------------
+
+If you want to play around with some sample data, you can run the following command to seed some
+fixture data into the database:
+
+.. code::
+
+    make load-fixtures
+
+This will add data for the geography, taxonomy, and specimen apps. You can then run the following
+command to create species pages for the species that were added from the fixtures:
+
+.. code::
+
+    make create-species-pages
+
+Interacting with the Frontend
+-----------------------------
+
+This project only contains the backend of my application (as it is a headless CMS with an API),
+though if you want to play with the frontend piece of my project, then you can `check out the
+README for it on GitHub. <https://github.com/Meganmccarty/memcollection-site>`_

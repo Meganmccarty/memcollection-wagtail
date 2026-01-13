@@ -138,7 +138,7 @@ Automatic Backups
 
 I've also set up a scheduled cron job in GitHub Actions that backs up the prod database in Neon
 every night (using ``pg_dump``) and stores the file in a Backblaze B2 bucket (you can view the
-`GitHub Action file over in GitHub <https://github.com/Meganmccarty/memcollection-wagtail/blob/main/.github/workflows/nightly-db-backup.yaml>`_).
+`GitHub Action file over in GitHub <https://github.com/Meganmccarty/memcollection-api/blob/main/.github/workflows/nightly-db-backup.yaml>`_).
 This assumes you've created a private, encrypted bucket (with object lock disabled) in the B2
 console; created a new app key and given it access only to the new bucket; and saved the app key
 credentials in both GitHub Secrets and locally within an aws cli profile. You'll also want to make a

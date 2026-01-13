@@ -76,7 +76,7 @@ loaddata: ## Loads data from fixtures into the database (must set 'model=models.
 load-fixtures: ## Loads all fixture data into the database
 	docker compose run --rm web python manage.py loaddata countries.json states.json counties.json localities.json \
 		gps_coordinates.json collecting_trips.json orders.json families.json subfamilies.json tribes.json genera.json \
-		species.json subspecies.json
+		species.json subspecies.json people.json specimen_records.json
 
 # Database backup and restore commands
 DB_NAME := ${DATABASE_NAME}
