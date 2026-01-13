@@ -1,4 +1,4 @@
-Django>=5.1,<5.2
+Django>=5.1,<6.1
 python-dotenv==1.2.1
 wagtail>=7.0,<7.3
 gunicorn>=21.2.0,<24.0.0
