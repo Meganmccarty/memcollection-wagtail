@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
-    "wagtail_footnotes",
+    # "wagtail_footnotes",
     "modelcluster",
     "taggit",
     "django.contrib.admin",
@@ -213,7 +213,7 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
                 "ul",
                 "hr",
                 "link",
-                "footnotes",
+                # "footnotes",
             ],
         },
     }

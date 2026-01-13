@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from wagtail_footnotes.models import Footnote
+
+# from wagtail_footnotes.models import Footnote
 
 from pages.models import SpeciesPage
 from taxonomy.serializers import (
@@ -13,12 +14,12 @@ from taxonomy.serializers import (
 )
 
 
-class FootnoteSerializer(serializers.ModelSerializer):
-    """A serializer for the Footnote model from wagtail_footnotes."""
+# class FootnoteSerializer(serializers.ModelSerializer):
+#     """A serializer for the Footnote model from wagtail_footnotes."""
 
-    class Meta:
-        model = Footnote
-        fields = "__all__"
+#     class Meta:
+#         model = Footnote
+#         fields = "__all__"
 
 
 class SpeciesPageSerializer(serializers.ModelSerializer):
@@ -31,7 +32,7 @@ class SpeciesPageSerializer(serializers.ModelSerializer):
     genus = GenusSerializer()
     species = SpeciesSerializer()
     subspecies = SubspeciesSerializer(many=True)
-    footnotes = FootnoteSerializer(many=True)
+    # footnotes = FootnoteSerializer(many=True)
 
     class Meta:
         model = SpeciesPage
@@ -53,7 +54,7 @@ class SpeciesPageSerializer(serializers.ModelSerializer):
             "habitat",
             "food",
             "life_cycle",
-            "footnotes",
+            # "footnotes",
             "first_published_at",
             "last_published_at",
         )
