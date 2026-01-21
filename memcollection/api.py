@@ -39,7 +39,6 @@ from taxonomy.views import (
     TribesAPIViewSet,
 )
 
-
 # Create the router. "wagtailapi" is the URL namespace
 api_router = WagtailAPIRouter("wagtailapi")
 
