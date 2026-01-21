@@ -13,7 +13,6 @@ from taxonomy.serializers import (
     TribeSerializer,
 )
 
-
 # class FootnoteSerializer(serializers.ModelSerializer):
 #     """A serializer for the Footnote model from wagtail_footnotes."""
 

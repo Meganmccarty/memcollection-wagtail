@@ -2,9 +2,9 @@ Django>=5.1,<6.1
 python-dotenv==1.2.1
 wagtail>=7.0,<7.3
 gunicorn>=21.2.0,<24.0.0
-psycopg2==2.9.10
+psycopg2==2.9.11
 dj-database-url>=2.1.0,<4.0.0
 whitenoise>=5.0,<6.12
 django-storages[s3]>=1.14.0,<2.0.0
 django-cors-headers==4.9.0
-django-filter==25.1
+django-filter==25.2

@@ -51,7 +51,7 @@ class State(TimeStampMixin):
 
     country = models.ForeignKey(
         Country,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="+",
         help_text="Select the state's country",
     )
@@ -89,7 +89,7 @@ class County(TimeStampMixin):
 
     state = models.ForeignKey(
         State,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="+",
         help_text="Select the state to which this county (or parish) belongs",
     )
@@ -201,13 +201,13 @@ class Locality(TimeStampMixin):
     """
 
     country = models.ForeignKey(
-        Country, null=True, blank=True, on_delete=models.CASCADE, related_name="+"
+        Country, null=True, blank=True, on_delete=models.RESTRICT, related_name="+"
     )
     state = models.ForeignKey(
-        State, null=True, blank=True, on_delete=models.CASCADE, related_name="+"
+        State, null=True, blank=True, on_delete=models.RESTRICT, related_name="+"
     )
     county = models.ForeignKey(
-        County, null=True, blank=True, on_delete=models.CASCADE, related_name="+"
+        County, null=True, blank=True, on_delete=models.RESTRICT, related_name="+"
     )
     name = models.CharField(
         max_length=100,
@@ -324,7 +324,7 @@ class GPS(TimeStampMixin):
 
     locality = models.ForeignKey(
         Locality,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="+",
         help_text="Select the locality for this set of coordinates",
     )

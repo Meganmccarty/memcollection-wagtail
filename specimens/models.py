@@ -145,49 +145,49 @@ class SpecimenRecord(TimeStampMixin):
     # Taxonomy fields
     order = models.ForeignKey(
         Order,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         null=True,
         blank=True,
         help_text="Select the specimen's order (if known)",
     )
     family = models.ForeignKey(
         Family,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         null=True,
         blank=True,
         help_text="Select the specimen's family (if known)",
     )
     subfamily = models.ForeignKey(
         Subfamily,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         null=True,
         blank=True,
         help_text="Select the specimen's subfamily (if known)",
     )
     tribe = models.ForeignKey(
         Tribe,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         null=True,
         blank=True,
         help_text="Select the specimen's tribe (if known)",
     )
     genus = models.ForeignKey(
         Genus,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         null=True,
         blank=True,
         help_text="Select the specimen's genus (if known)",
     )
     species = models.ForeignKey(
         Species,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         null=True,
         blank=True,
         help_text="Select the specimen's species (if known)",
     )
     subspecies = models.ForeignKey(
         Subspecies,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         null=True,
         blank=True,
         help_text="Select the specimen's subspecies (if known)",
@@ -206,7 +206,7 @@ class SpecimenRecord(TimeStampMixin):
     # Specimen fields
     determiner = models.ForeignKey(
         Person,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="specimen_determiners",
         null=True,
         blank=True,
@@ -232,7 +232,7 @@ class SpecimenRecord(TimeStampMixin):
     )
     preparer = models.ForeignKey(
         Person,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="specimen_preparers",
         null=True,
         help_text="Select the person who prepared the specimen",
@@ -257,7 +257,7 @@ class SpecimenRecord(TimeStampMixin):
     # Geography fields
     collecting_trip = models.ForeignKey(
         CollectingTrip,
-        on_delete=models.SET_NULL,
+        on_delete=models.RESTRICT,
         related_name="specimen_records",
         null=True,
         blank=True,
@@ -265,7 +265,7 @@ class SpecimenRecord(TimeStampMixin):
     )
     country = models.ForeignKey(
         Country,
-        on_delete=models.SET_NULL,
+        on_delete=models.RESTRICT,
         related_name="specimen_records",
         null=True,
         blank=True,
@@ -273,7 +273,7 @@ class SpecimenRecord(TimeStampMixin):
     )
     state = models.ForeignKey(
         State,
-        on_delete=models.SET_NULL,
+        on_delete=models.RESTRICT,
         related_name="specimen_records",
         null=True,
         blank=True,
@@ -281,7 +281,7 @@ class SpecimenRecord(TimeStampMixin):
     )
     county = models.ForeignKey(
         County,
-        on_delete=models.SET_NULL,
+        on_delete=models.RESTRICT,
         related_name="specimen_records",
         null=True,
         blank=True,
@@ -289,7 +289,7 @@ class SpecimenRecord(TimeStampMixin):
     )
     locality = models.ForeignKey(
         Locality,
-        on_delete=models.SET_NULL,
+        on_delete=models.RESTRICT,
         related_name="specimen_records",
         null=True,
         blank=True,
@@ -297,7 +297,7 @@ class SpecimenRecord(TimeStampMixin):
     )
     gps = models.ForeignKey(
         GPS,
-        on_delete=models.SET_NULL,
+        on_delete=models.RESTRICT,
         related_name="specimen_records",
         null=True,
         blank=True,

@@ -78,7 +78,7 @@ class CustomRendition(AbstractRendition, TimeStampMixin):
     """
 
     image = models.ForeignKey(
-        CustomImage, on_delete=models.CASCADE, related_name="renditions"
+        CustomImage, on_delete=models.RESTRICT, related_name="renditions"
     )
 
     class Meta:
@@ -102,7 +102,7 @@ class BaseLiveImage(CustomImage):
 
     country = models.ForeignKey(
         Country,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="%(class)s",
         null=True,
         blank=True,
@@ -110,7 +110,7 @@ class BaseLiveImage(CustomImage):
     )
     state = models.ForeignKey(
         State,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="%(class)s",
         null=True,
         blank=True,
@@ -118,7 +118,7 @@ class BaseLiveImage(CustomImage):
     )
     county = models.ForeignKey(
         County,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="%(class)s",
         null=True,
         blank=True,
@@ -126,7 +126,7 @@ class BaseLiveImage(CustomImage):
     )
     locality = models.ForeignKey(
         Locality,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="%(class)s",
         null=True,
         blank=True,
@@ -134,7 +134,7 @@ class BaseLiveImage(CustomImage):
     )
     gps = models.ForeignKey(
         GPS,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="%(class)s",
         null=True,
         blank=True,
@@ -142,7 +142,7 @@ class BaseLiveImage(CustomImage):
     )
     collecting_trip = models.ForeignKey(
         CollectingTrip,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="%(class)s",
         null=True,
         blank=True,
@@ -162,7 +162,7 @@ class SpecimenRecordImage(CustomImage):
 
     usi = models.ForeignKey(
         SpecimenRecord,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="specimen_images",
         help_text="Select the specimen in the image",
     )
@@ -201,7 +201,7 @@ class InsectImage(BaseLiveImage):
 
     species = models.ForeignKey(
         Species,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         null=True,
         blank=True,
         related_name="insect_images",
@@ -209,7 +209,7 @@ class InsectImage(BaseLiveImage):
     )
     species_page = models.ForeignKey(
         SpeciesPage,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         null=True,
         blank=True,
         related_name="insect_images",
