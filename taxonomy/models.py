@@ -72,7 +72,7 @@ class Family(TimeStampMixin, TaxonomyBase):
 
     order = models.ForeignKey(
         Order,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="+",
         help_text="Select an order to which this family belongs",
     )
@@ -98,7 +98,7 @@ class Subfamily(TimeStampMixin, TaxonomyBase):
 
     family = models.ForeignKey(
         Family,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="+",
         help_text="Select the family to which this subfamily belongs",
     )
@@ -124,7 +124,7 @@ class Tribe(TimeStampMixin, TaxonomyBase):
 
     subfamily = models.ForeignKey(
         Subfamily,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="+",
         help_text="Select the subfamily to which this tribe belongs",
     )
@@ -149,7 +149,7 @@ class Genus(TimeStampMixin, TaxonomyBase):
 
     tribe = models.ForeignKey(
         Tribe,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="+",
         help_text="Select the tribe to which this genus belongs",
     )
@@ -179,7 +179,7 @@ class Species(TimeStampMixin, TaxonomyBase):
 
     genus = models.ForeignKey(
         Genus,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="+",
         help_text="Select the genus to which this species belongs",
     )
@@ -245,7 +245,7 @@ class Subspecies(TimeStampMixin, TaxonomyBase):
 
     species = models.ForeignKey(
         Species,
-        on_delete=models.CASCADE,
+        on_delete=models.RESTRICT,
         related_name="subspecies",
         help_text="Select the species to which this subspecies belongs",
     )
